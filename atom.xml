@@ -1,0 +1,1505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://wulilinghan.github.io</id>
+    <title>唧唧啵啵耶</title>
+    <updated>2022-08-24T13:47:43.523Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://wulilinghan.github.io"/>
+    <link rel="self" href="https://wulilinghan.github.io/atom.xml"/>
+    <subtitle>这是网站描述。</subtitle>
+    <logo>https://wulilinghan.github.io/images/avatar.png</logo>
+    <icon>https://wulilinghan.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2022, 唧唧啵啵耶</rights>
+    <entry>
+        <title type="html"><![CDATA[【教程】Windows系统下搭建KF2服务器]]></title>
+        <id>https://wulilinghan.github.io/post/windows-kf2server/</id>
+        <link href="https://wulilinghan.github.io/post/windows-kf2server/">
+        </link>
+        <updated>2021-05-03T18:26:31.000Z</updated>
+        <content type="html"><![CDATA[<p>TODO</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[【教程】Linux系统下搭建KF2服务器]]></title>
+        <id>https://wulilinghan.github.io/post/linux-kf2server/</id>
+        <link href="https://wulilinghan.github.io/post/linux-kf2server/">
+        </link>
+        <updated>2021-05-03T05:01:41.000Z</updated>
+        <content type="html"><![CDATA[<p>操作系统:：<code>CentOS 7.6 64bit</code><br>
+规格:：<code>2 核 4 GB</code><br>
+带宽:：<code>5 Mbit/s 带宽</code><br>
+操作账户：<code>root</code><br>
+存储空间：<code>需要至少23G的可用空间</code></p>
+<p><ul class="markdownIt-TOC">
+<li><a href="#%E4%B8%80-%E5%AE%89%E8%A3%85steamcmd">一、安装SteamCMD</a>
+<ul>
+<li><a href="#1-%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C%E5%BA%93">1. 安装运行库</a></li>
+<li><a href="#2-%E5%AE%89%E8%A3%85steamcmd">2. 安装SteamCMD</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E5%AE%89%E8%A3%85kf2%E6%9C%8D%E5%8A%A1%E7%AB%AF">二、安装KF2服务端</a>
+<ul>
+<li><a href="#1-%E5%90%AF%E5%8A%A8steamcmd%E5%B9%B6%E4%B8%8B%E8%BD%BDkf2server">1. 启动steamcmd并下载KF2Server</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%88%BF%E9%97%B4%E9%85%8D%E7%BD%AE">三、服务器房间配置</a>
+<ul>
+<li><a href="#1-%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E5%90%AF%E5%8A%A8">1. 默认配置启动</a></li>
+<li><a href="#2-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3">2. 配置文件相关</a></li>
+<li><a href="#3-%E5%88%9B%E5%BB%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC">3. 创建启动脚本</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E5%BC%80">四、服务多开</a></li>
+<li><a href="#%E4%BA%94-%E6%9C%8D%E5%8A%A1%E9%87%8D%E5%90%AF">五、服务重启</a></li>
+<li><a href="#%E5%85%AD-%E5%88%9B%E6%84%8F%E5%B7%A5%E5%9D%8A%E8%AE%A2%E9%98%85">六、创意工坊订阅</a></li>
+</ul>
+</p>
+<h1 id="一-安装steamcmd">一、安装SteamCMD</h1>
+<h2 id="1-安装运行库">1. 安装运行库</h2>
+<p>sudo yum -y install glibc.i686<br>
+<img src="https://wulilinghan.github.io/post-images/1620018302295.png" alt="" loading="lazy"></p>
+<h2 id="2-安装steamcmd">2. 安装SteamCMD</h2>
+<blockquote>
+<p>一些基本命令使用</p>
+<ul>
+<li>cd  [目录] 进入某目录 eg: cd /home/steamcmd  进入根路径下home目录下的steamcmd文件夹</li>
+<li>pwd 查看当前路径</li>
+<li>mkdir [文件夹] 创建文件夹 eg: mkdir test  在当前目录下创建test文件夹<br>
+加参数<code>-p</code>可创建多层次文件夹  eg: mkdir -p /home/steamcmd 在根路径下home目录下创建steamcmd文件夹</li>
+<li>ll 查看当前目录文件列表</li>
+</ul>
+</blockquote>
+<pre><code>mkdir -p /home/steamcmd
+cd /home/steamcmd
+# 下载steamcmd
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz --no-check-certificate
+</code></pre>
+<blockquote>
+<p>--no-check-certificate 不检查安全网站证书</p>
+</blockquote>
+<p><img src="https://wulilinghan.github.io/post-images/1620020678285.png" alt="" loading="lazy"><br>
+<code>ll</code>查看一下当前目录，<code>steamcmd_linux.tar.gz</code>下载下来了<br>
+<img src="https://wulilinghan.github.io/post-images/1620020872971.png" alt="" loading="lazy"><br>
+<code>tar -zxf steamcmd_linux.tar.gz</code> 解压<br>
+<img src="https://wulilinghan.github.io/post-images/1620020975168.png" alt="" loading="lazy"></p>
+<h1 id="二-安装kf2服务端">二、安装KF2服务端</h1>
+<h2 id="1-启动steamcmd并下载kf2server">1. 启动steamcmd并下载KF2Server</h2>
+<p>接着上面的目录继续操作，忘了就直接<code>cd /home/steamcmd</code>。</p>
+<pre><code># 启动steam
+./steamcmd.sh
+</code></pre>
+<p><img src="https://wulilinghan.github.io/post-images/1620021415250.png" alt="" loading="lazy"><br>
+等待进度条....<br>
+<img src="https://wulilinghan.github.io/post-images/1620021587192.png" alt="" loading="lazy"></p>
+<pre><code># 匿名登录
+login anonymous
+# 设置安装目录
+force_install_dir ./steamapps/KF2Server/
+# 下载KF2服务器
+app_update 232130 validate
+</code></pre>
+<blockquote>
+<p>实际安装目录也就是<code>/home/steamcmd/steamapps/KF2Server</code><br>
+安装或者升级命令：app_update [steam app id]<br>
+<a href="https://steamdb.keylol.com/search/232130">steam app id 查询</a><br>
+需要升级的话，在命令行加上升级参数: validate</p>
+</blockquote>
+<p><img src="https://wulilinghan.github.io/post-images/1620022883896.png" alt="" loading="lazy"><br>
+<code>Error! App '232130' state is 0x202 after update job.</code>网上一搜好像是说磁盘空间不够。</p>
+<p>含泪扩容......(穷逼如是说</p>
+<p>开始下载了....<br>
+<img src="https://wulilinghan.github.io/post-images/1620027663010.png" alt="" loading="lazy"><br>
+总大小<code>23G</code>左右，慢慢下吧......<br>
+下载完使用<code>quit</code>退出窗口。</p>
+<h1 id="三-服务器房间配置">三、服务器房间配置</h1>
+<h2 id="1-默认配置启动">1. 默认配置启动</h2>
+<p>输入以下命令，启动KF2：<br>
+<code>/home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?AdminPassword=123</code></p>
+<blockquote>
+<p><code>/home/steamcmd/steamapps/KF2Server/Binaries/Win64</code>是你自己的游戏安装路径<br>
+<code>KFGameSteamServer.bin.x86_64</code> 是启动文件<br>
+<code>kf-bioticslab</code> 游戏启动默认地图(生命学实验室)<br>
+<code>AdminPassword</code> web管理页面密码，账号是admin<br>
+<img src="https://wulilinghan.github.io/post-images/1620096922084.png" alt="" loading="lazy"><br>
+问题一<br>
+<img src="https://wulilinghan.github.io/post-images/1620034890774.png" alt="" loading="lazy"><br>
+解决:<br>
+运行命令<code>strings /usr/lib64/libstdc++.so.6 | grep GLIBC</code>检查动态库，发现确实没有&gt; <code>GLIBCXX_3.4.21</code>和<code>GLIBCXX_3.4.20</code>版本，需要升级<code>gcc</code><br>
+<img src="https://wulilinghan.github.io/post-images/1620035055613.png" alt="" loading="lazy"><br>
+这个问题因人而异，可自行<a href="https://blog.csdn.net/CV_Jason/article/details/84034220">网上搜索资料解决</a></p>
+</blockquote>
+<p>第一次启动后会在<code>/home/steamcmd/steamapps/KF2Server/KFGame/Config/</code>目录下生成<code>LinuxServer-KFxxxxx.ini</code>等文件。</p>
+<p>这是启动方式只是临时启动，关闭窗口后游戏也随之关闭了，也方便自己调试地图插件等是否能用。</p>
+<p><strong>配置文件配置好并且启动了服务，客户端怎么连接呢？</strong></p>
+<p>在杀地板客户端，<code>shift+~</code>打开控制台输入<code>open [目标IP]]:7777</code>，如果连接有密码，会提示你输密码，如若在确定服务正常启动的情况下输入回车后<strong>没任何反应，看下服务器的安全组和防火墙是否把相应的端口开放。</strong></p>
+<blockquote>
+<p>eg: open 192.168.1.1:7777<br>
+默认端口7777没改的话，可以不输端口</p>
+</blockquote>
+<p>相关端口：</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Default</th>
+<th>Protocol</th>
+<th>What this option controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Game Port</td>
+<td>7777</td>
+<td>UDP</td>
+<td>This is the main port the game will send connections over</td>
+</tr>
+<tr>
+<td>Query Port</td>
+<td>27015</td>
+<td>UDP</td>
+<td>This port is used to communicate with the Steam Master Server</td>
+</tr>
+<tr>
+<td>Web Admin</td>
+<td>8080</td>
+<td>TCP</td>
+<td>This port is used to connect to your servers web admin page (if turned on)</td>
+</tr>
+<tr>
+<td>Steam Port</td>
+<td>20560</td>
+<td>UDP</td>
+<td></td>
+</tr>
+<tr>
+<td>NTP Port</td>
+<td>123</td>
+<td>UDP</td>
+<td>Weekly Outbreak Only - Internet time lookup to determine correct Outbreak</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><a href="https://wiki.killingfloor2.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Ports">wiki.killingfloor2.com_ports</a></p>
+</blockquote>
+<h2 id="2-配置文件相关">2. 配置文件相关</h2>
+<p>需要关注的一些文件配置(<code>/home/steamcmd/steamapps/KF2Server/KFGame/Config/</code>):</p>
+<ol>
+<li><code>KFWeb.ini</code></li>
+</ol>
+<pre><code>[IpDrv.WebServer]
+# web页面访问端口
+ListenPort=8080
+# 远程网页管理
+bEnabled=true
+</code></pre>
+<blockquote>
+<p>WebAdmin默认是关闭的，这里把它开启，访问地址就是 [IP地址]:[默认是8080]</p>
+</blockquote>
+<ol start="2">
+<li><code>LinuxServer-KFEngine.ini</code></li>
+</ol>
+<pre><code>[URL]
+# 想要多开服务的话，各端口都要改
+# 游戏运行端口
+Port=7777
+# 游戏通讯端口
+PeerPort=7778
+
+# 订阅创意工坊
+# 这一栏配置默认没有，需手动加
+[OnlineSubsystemSteamworks.KFWorkshopSteamworks]
+# 每一行就是一个创意工坊的ID
+# 找到地图ID以后添加好，然后就添加地图名到LinuxServer-KFGame.ini文件地图循环属性里就可以了
+# Killing Pool
+ServerSubscribedWorkshopItems=1210703659
+# KF-China_Temple_insane_edit
+ServerSubscribedWorkshopItems=891319214  
+</code></pre>
+<ol start="3">
+<li><code>LinuxServer-KFGame.ini</code><br>
+这个文件涉及到的参数很多，也是服务器最基本，最重要的参数。包括了，服务器难度，服务器波数，服务器密码，管理员密码，服务器名字，地图循环设置（就是一局打完后地图的投票列表）。</li>
+</ol>
+<pre><code>[Engine.GameInfo]
+MaxPlayers=6
+# 游戏难度 0（普通）1（困难）2（自杀）3（人间炼狱）
+GameDifficulty=3.000000
+
+[Engine.AccessControl]
+# 网页管理web密码 默认为空
+AdminPassword=xxx
+# 房间密码 默认为空
+GamePassword=xxx
+
+[KFGame.KFGameInfo]
+# 对游戏波数进行设置 0（4波）1（7波）2（10波）
+GameLength=2
+
+# 开启将使用你自定义的地图循环列表，而不是官方默认的。开启（True）关闭（False）。只可以使用True（开启）False（关闭）来作为结尾。官方默认是开启（True），所以这项其实你完全不用动。知道有个这玩意就可以了。
+bUseMapList=True
+ActiveMapCycle=0
+# 地图循环列表
+GameMapCycles=(Maps=(&quot;KF-KillingPool&quot;,&quot;KF-China_Temple_insane_edit&quot;,&quot;KF-GiantCityRuins_Original&quot;,&quot;---------------------------------&quot;,&quot;KF-Airship&quot;,&quot;KF-AshwoodAsylum&quot;,&quot;KF-Biolapse&quot;,&quot;KF-Bioticslab&quot;,&quot;KF-BlackForest&quot;,&quot;KF-BurningParis&quot;,&quot;KF-Catacombs&quot;,&quot;KF-ContainmentStation&quot;,&quot;KF-Desolation&quot;,&quot;KF-DieSector&quot;,&quot;KF-Dystopia2029&quot;,&quot;KF-Elysium&quot;,&quot;KF-EvacuationPoint&quot;,&quot;KF-Farmhouse&quot;,&quot;KF-HellmarkStation&quot;,&quot;KF-HostileGrounds&quot;,&quot;KF-InfernalRealm&quot;,&quot;KF-KrampusLair&quot;,&quot;KF-Lockdown&quot;,&quot;KF-MonsterBall&quot;,&quot;KF-Nightmare&quot;,&quot;KF-Nuked&quot;,&quot;KF-Outpost&quot;,&quot;KF-PowerCore_Holdout&quot;,&quot;KF-Prison&quot;,&quot;KF-Sanitarium&quot;,&quot;KF-Santasworkshop&quot;,&quot;KF-ShoppingSpree&quot;,&quot;KF-Spillway&quot;,&quot;KF-SteamFortress&quot;,&quot;KF-TheDescent&quot;,&quot;KF-TragicKingdom&quot;,&quot;KF-VolterManor&quot;,&quot;KF-ZedLanding&quot;))
+
+# 可以使用[imgur](https://imgur.com/register?redirect=%2F)提供的免费图片外链服务或者其他图床服务，也可以自己用nginx做一个文件服务。
+# 这个是公告图片地址 （图片大小必须为512x256像素大小的PNG图片，和原图格式大小相同）
+BannerLink=http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png
+# 这个是公告文字内容
+ServerMOTD=Welcome to our server. \n \n Have fun and good luck!
+# 自定义的链接
+WebsiteLink=http://killingfloor2.com/
+# 这是BannerLink下方的标题
+ClanMotto=This is the clan motto.
+
+[Engine.GameReplicationInfo]
+# 服务器浏览时看到房间名字
+ServerName=Killing Floor 2 Server
+ShortName=KFServer
+</code></pre>
+<h2 id="3-创建启动脚本">3. 创建启动脚本</h2>
+<p>这启动脚本什么的写不写无所谓，启动也就是一行命令的事，</p>
+<ul>
+<li><strong>脚本位置放哪随意，我这里放在steam安装目录下。</strong><br>
+<code>cd /home/steamcmd/</code></li>
+<li><strong>创建kf2_start.sh文件</strong><br>
+<code>touch kf2_start.sh</code></li>
+<li><strong>给kf2_start.sh添加可读可执行权限</strong><br>
+<code>chmod +rx kf2_start.sh</code></li>
+<li><strong>编辑脚本内容，按 <code>i</code> 进入编辑模式</strong><br>
+<code>vim kf2_start.sh</code></li>
+<li><strong>以下是脚本内容</strong></li>
+</ul>
+<pre><code class="language-shell">#!/bin/sh
+# start kf2server
+nohup /home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?GameDifficulty=3?GameLength=2?GamePassword=2333 &gt;/dev/null 2&gt;&amp;1 &amp;
+</code></pre>
+<p>填完后 shift+冒号 进入底行模式 ,输入wq，按enter键保存退出。</p>
+<blockquote>
+<p><code>kf-bioticslab</code>  默认启动地图(生命学实验室)<br>
+后面的启动参数可加可不加，配置文件也可以配置。</p>
+<p><code>GameDifficulty</code>           游戏难度设置  <strong>0(普通) 1 (困难) 2 (自杀) 3(人间炼狱)</strong><br>
+<code>GameLength</code>    游戏波数  <strong>0(4波 ) 1(7波) 2(10波)</strong><br>
+<code>GamePassword</code>  房间密码</p>
+</blockquote>
+<p>查看KF进程<br>
+<code>ps -ef | grep KFGame</code><br>
+<img src="https://wulilinghan.github.io/post-images/1620110843013.png" alt="" loading="lazy"></p>
+<p><a href="https://wiki.killingfloor2.com/index.php?title=Dedicated_Server_(Killing_Floor_2)">Dedicated Server (Killing Floor 2) wiki</a></p>
+<h1 id="四-服务多开">四、服务多开</h1>
+<p>拷贝多份配置文件，更改<strong>配置文件运行端口</strong>就好了。</p>
+<pre><code>提供下我的配置参考下
+
+链接：https://pan.baidu.com/s/1bG2p7DCLAsyaQnYmbuhTxg 
+提取码：t41f 
+复制这段内容后打开百度网盘手机App，操作更方便哦
+</code></pre>
+<p>更改端口：</p>
+<ul>
+<li><code>KFWeb.ini</code></li>
+</ul>
+<pre><code>[IpDrv.WebServer]
+ListenPort=8081
+</code></pre>
+<ul>
+<li><code>LinuxServer-KFEngine.ini</code></li>
+</ul>
+<pre><code>[URL]
+Port=8888
+PeerPort=8889
+</code></pre>
+<p>在安装目录下<code>KFGame/Config/</code>新建几个文件夹，<br>
+<img src="https://wulilinghan.github.io/post-images/1620122347087.png" alt="" loading="lazy"><br>
+使用<code>-ConfigSubDir</code>参数启动多个服务。</p>
+<blockquote>
+<p>ConfigSubDir 找的是相对路径的配置，会自动找到<code>KFGame/Config/</code>目录下的文件夹，后面跟上文件夹名称就行了</p>
+</blockquote>
+<p>看下配置文件夹里的内容：<br>
+<img src="https://wulilinghan.github.io/post-images/1620122647594.png" alt="" loading="lazy"></p>
+<p>举几个启动例子：<br>
+启动服1<br>
+<code>nohup /home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64 KF-China_Temple_insane_edit -ConfigSubDir=kf2server-HellonEarth-Long &gt;/dev/null 2&gt;&amp;1 &amp;</code><br>
+启动服2<br>
+<code>nohup /home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64 KF-China_Temple_insane_edit -ConfigSubDir=kf2server-Suicidal-Long &gt;/dev/null 2&gt;&amp;1 &amp;</code></p>
+<p>注意看<code>-ConfigSubDir</code>后面的值不一样</p>
+<blockquote>
+<ul>
+<li><code>nohup ....  &gt;/dev/null 2&gt;&amp;1 &amp;</code> 可以使服务后台运行，并且忽略日志输出</li>
+<li><code>/home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64</code> 我自己的KF2的执行路径<code>/home/steamcmd/steamapps/KF2Server</code>这里可能不太一样，后面的是一样</li>
+<li><code>KF-China_Temple_insane_edit</code> 房间默认地图</li>
+<li><code>-ConfigSubDir=kf2server-Suicidal-Long</code> 指定不同的配置文件启动</li>
+</ul>
+</blockquote>
+<h1 id="五-服务重启">五、服务重启</h1>
+<p>找到进程，然后杀掉，重新用命令启动就好了。<br>
+<code>ps -ef | grep KFGame</code>查询进程，查到之后根据运行的名称杀进程<code>kill [pid]</code><br>
+这个pid就是使用查询命令查出来的<strong>数据的第二列</strong>。黄框的数据。<br>
+<img src="https://wulilinghan.github.io/post-images/1620120808655.png" alt="" loading="lazy"></p>
+<p>然后再执行你自己的<strong>启动命令</strong>就好了。</p>
+<h1 id="六-创意工坊订阅">六、创意工坊订阅</h1>
+<p>捯饬自己的服务器，当然是为了能够玩创意工坊里的第三方图了。</p>
+<p>TODO</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Httpclient - RestTemplate]]></title>
+        <id>https://wulilinghan.github.io/post/httpclient-resttemplate/</id>
+        <link href="https://wulilinghan.github.io/post/httpclient-resttemplate/">
+        </link>
+        <updated>2021-04-11T07:59:58.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%B3%A8%E5%86%8Cresttemplate">注册RestTemplate</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82-%E5%B9%B6%E8%AE%BE%E7%BD%AEcookie%E5%92%8Cheader">GET请求, 并设置Cookie和Header</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82%E4%BC%A0%E5%8F%82">GET请求传参</a></li>
+<li><a href="#post%E8%AF%B7%E6%B1%82">POST请求</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">上传文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h3 id="注册resttemplate">注册RestTemplate</h3>
+<pre><code class="language-Java">@Component
+public class BeanRegister {
+
+    @Bean
+    public RestTemplate restTemplate(ClientHttpRequestFactory factory) {
+        return new RestTemplate(factory);
+    }
+
+    @Bean
+    public ClientHttpRequestFactory simpleClientHttpRequestFactory() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+//        factory.setReadTimeout(5000);
+//        factory.setConnectTimeout(15000);
+        // 设置代理
+        //factory.setProxy(null);
+        return factory;
+    }
+
+    /**
+     * org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException: The field file exceeds its maximum permitted size of 1048576 bytes., code=400
+     * 设置tomcat上传文件大小限制
+     *
+     * @return /
+     */
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //允许上传的文件最大值 (//KB,MB)
+        factory.setMaxFileSize(DataSize.parse(&quot;50MB&quot;));
+        /// 设置总上传数据总大小
+        factory.setMaxRequestSize(DataSize.parse(&quot;100MB&quot;));
+        return factory.createMultipartConfig();
+    }
+}
+</code></pre>
+<h3 id="get请求-并设置cookie和header">GET请求, 并设置Cookie和Header</h3>
+<pre><code class="language-Java">    /**
+     * // 1. 无参,不指定Header调用
+     * //        ResponseEntity&lt;R&gt; forEntity = restTemplate.getForEntity(URL_USER_LIST, R.class);
+     * &lt;p&gt;
+     * // 2. 无参,指定Header调用 get请求需要使用exchange()
+     */
+    @Test
+    public void testGetUserList() {
+        // 1. 无参,不指定Header调用
+//        ResponseEntity&lt;R&gt; forEntity = restTemplate.getForEntity(URL_USER_LIST, R.class);
+
+        // 2. 无参,指定Header调用 get请求需要使用exchange()
+
+        // 封装请求头
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        httpHeaders.set(&quot;token&quot;, TOKEN);
+        HttpEntity&lt;String&gt; httpEntity = new HttpEntity&lt;&gt;(null, httpHeaders);
+
+
+        ResponseEntity&lt;R&gt; forEntity1 = restTemplate.exchange(URL_GET_USER_LIST, HttpMethod.GET, httpEntity, R.class);
+        System.out.println(&quot;forEntity1.getBody() = &quot; + forEntity1.getBody());
+
+    }
+</code></pre>
+<h3 id="get请求传参">GET请求传参</h3>
+<pre><code class="language-Java">private static final String URL_GET_USER_ID = &quot;http://124.71.56.21:8081/get/user/id?uid={uid}&quot;;
+    /**
+     * 带参,并设置请求头,使用map封装参数
+     */
+    @Test
+    public void testGetUserBYId() {
+        // 带参,指定Header调用 get请求需要使用exchange()
+        List&lt;String&gt; cookies = new ArrayList&lt;&gt;();
+        cookies.add(&quot;JSESSIONID=&quot; + JSESSIONID);
+
+        // 封装请求头
+        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.put(HttpHeaders.COOKIE, cookies);
+        httpHeaders.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        httpHeaders.set(&quot;token&quot;, TOKEN);
+        HttpEntity&lt;String&gt; httpEntity = new HttpEntity&lt;&gt;(httpHeaders);
+
+        // 封装参数
+        Map&lt;String, Object&gt; paramMap = new HashMap&lt;&gt;();
+        paramMap.put(&quot;uid&quot;, &quot;1&quot;);
+
+        // 请求url要使用占位符
+        ResponseEntity&lt;R&gt; forEntity1 = restTemplate.exchange(URL_GET_USER_ID, HttpMethod.GET, httpEntity, R.class, paramMap);
+        System.out.println(&quot;forEntity1.getBody() = &quot; + forEntity1.getBody());
+    }
+</code></pre>
+<h3 id="post请求">POST请求</h3>
+<ol>
+<li>表单提交</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 表单提交, 要使用MultiValueMap
+     */
+    @Test
+    public void testPostUserByForm() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        headers.set(&quot;token&quot;, TOKEN);
+
+        MultiValueMap&lt;String, Object&gt; map = new LinkedMultiValueMap&lt;String, Object&gt;();
+        map.add(&quot;uid&quot;, 4);
+        map.add(&quot;username&quot;, &quot;嘻嘻&quot;);
+        map.add(&quot;age&quot;, 24);
+        map.add(&quot;address&quot;, &quot;潮汕&quot;);
+        HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt; request = new HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt;(map, headers);
+
+        ResponseEntity&lt;R&gt; response = restTemplate.postForEntity(URL_POST_USER_BY_FORM, request, R.class);
+        System.out.println(&quot;response = &quot; + response.getBody());
+    }
+</code></pre>
+<ol start="2">
+<li>JSON提交</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * JSON提交
+     */
+    @Test
+    public void testPostUserByJson() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set(&quot;Accept&quot;, MediaType.APPLICATION_JSON_VALUE);
+        headers.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        headers.set(&quot;token&quot;, TOKEN);
+
+        User user = new User().setUid(5).setUsername(&quot;haha&quot;).setAge(66).setAddress(&quot;龙岗&quot;);
+        String jsonString = JSON.toJSONString(user);
+        System.out.println(&quot;jsonString = &quot; + jsonString);
+
+//        JSONObject jsonString = new JSONObject();
+//        jsonString.put(&quot;uid&quot;, 5);
+//        jsonString.put(&quot;username&quot;, &quot;haha&quot;);
+//        jsonString.put(&quot;age&quot;, 77);
+//        jsonString.put(&quot;address&quot;, &quot;龙岗&quot;);
+
+        HttpEntity&lt;String&gt; request = new HttpEntity&lt;&gt;(jsonString, headers);
+
+        ResponseEntity&lt;R&gt; response = restTemplate.postForEntity(URL_POST_USER_BY_JSON, request, R.class);
+        System.out.println(&quot;response = &quot; + response.getBody());
+    }
+</code></pre>
+<h3 id="上传文件">上传文件</h3>
+<ol>
+<li>设置Tomcat上传限制</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException: The field file exceeds its maximum permitted size of 1048576 bytes., code=400
+     * 设置tomcat上传文件大小限制
+     *
+     * @return /
+     */
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //允许上传的文件最大值 (//KB,MB)
+        factory.setMaxFileSize(DataSize.parse(&quot;50MB&quot;));
+        /// 设置总上传数据总大小
+        factory.setMaxRequestSize(DataSize.parse(&quot;100MB&quot;));
+        return factory.createMultipartConfig();
+    }
+</code></pre>
+<p>案例:</p>
+<pre><code class="language-Java">    /**
+     * 上传文件
+     */
+    @Test
+    public void testUploadFile() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
+        httpHeaders.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        httpHeaders.set(&quot;token&quot;, TOKEN);
+
+        MultiValueMap&lt;String, Object&gt; paramMap = new LinkedMultiValueMap&lt;&gt;();
+        paramMap.add(&quot;file&quot;, new ClassPathResource(&quot;yuque_diagram.jpg&quot;));
+        paramMap.add(&quot;file&quot;, new ClassPathResource(&quot;线程类图.png&quot;));
+        paramMap.add(&quot;file&quot;, new ClassPathResource(&quot;acane_madder - 庭園にて。.mp3&quot;));
+        paramMap.add(&quot;isErr&quot;, &quot;&quot;);
+
+        HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt; httpEntity = new HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt;(paramMap, httpHeaders);
+
+        ResponseEntity&lt;R&gt; response = restTemplate.postForEntity(URL_POST_FILE_UP1, httpEntity, R.class);
+        System.out.println(&quot;response = &quot; + response.getBody());
+        System.out.println(&quot;response.getStatusCode() = &quot; + response.getStatusCode());
+        System.out.println(&quot;response.getStatusCode().is2xxSuccessful() = &quot; + response.getStatusCode().is2xxSuccessful());
+
+    }
+</code></pre>
+<blockquote>
+<p><a href="https://github.com/tanglinghan/demo-collection/tree/main/http-demo">代码</a></p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Httpclient - Spring5 WebFlux之Webclient]]></title>
+        <id>https://wulilinghan.github.io/post/spring5-webclient/</id>
+        <link href="https://wulilinghan.github.io/post/spring5-webclient/">
+        </link>
+        <updated>2021-04-10T12:51:41.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%BC%95%E5%8C%85">引包</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BAwebclient%E5%AF%B9%E8%B1%A1">构建WebClient对象</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E8%AE%BE%E7%BD%AEcookie%E5%92%8Cheader">请求设置Cookie和Header</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82">GET请求</a></li>
+<li><a href="#post%E8%AF%B7%E6%B1%82">POST请求</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6-%E8%AF%B7%E6%B1%82%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">上传文件, 请求异常处理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<p>Spring5带来了新的响应式web开发框架WebFlux，同时，也引入了新的HttpClient框架WebClient。WebClient是Spring5中引入的执行 HTTP 请求的非阻塞、反应式客户端。</p>
+<p>它对同步和异步以及流方案都有很好的支持，WebClient发布后，RestTemplate将在将来版本中弃用，并且不会向前添加主要新功能。</p>
+<blockquote>
+<p>public interface WebClient<br>
+Non-blocking, reactive client to perform HTTP requests, exposing a fluent, reactive &gt; API over underlying HTTP client libraries such as Reactor Netty.<br>
+Use static factory methods create() or create(String), or builder() to prepare an  &gt; instance.</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>For examples with a response body see:</p>
+<blockquote>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestHeadersSpec.html#retrieve--">retrieve()</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestHeadersSpec.html#exchangeToMono-java.util.function.Function-">exchangeToMono()</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestHeadersSpec.html#exchangeToFlux-java.util.function.Function-">exchangeToFlux()</a></li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>For examples with a request body see:</p>
+<blockquote>
+<blockquote>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestBodySpec.html#bodyValue-java.lang.Object-">bodyValue(Object)</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestBodySpec.html#body-P-java.lang.Class-">body(Publisher,Class)</a></li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>Since:</p>
+<blockquote>
+<p>5.0</p>
+</blockquote>
+</blockquote>
+<h3 id="引包">引包</h3>
+<pre><code>        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
+             &lt;version&gt;2.3.0.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<h3 id="构建webclient对象">构建WebClient对象</h3>
+<pre><code class="language-Java">    private static final String JSESSIONID = &quot;6dfd8a2d-d6de-40e5-9611-3f604b402a8b&quot;;
+    private static final String TOKEN = &quot;6dfd8a2dd6de40e596113f604b402a8b&quot;;
+    private static final String BASE_URL = &quot;http://124.71.56.21:8081&quot;;
+
+    private static final WebClient client = WebClient.builder()
+            .baseUrl(BASE_URL)
+            .defaultHeader(&quot;token&quot;, TOKEN)
+            .defaultCookie(&quot;JSESSIONID&quot;, JSESSIONID)
+            .build();
+</code></pre>
+<p>这里已经这个对象加上默认的请求头和cookie了.</p>
+<h3 id="请求设置cookie和header">请求设置Cookie和Header</h3>
+<pre><code class="language-Java">    @Test
+    public void testGetUserList() {
+        Mono&lt;R&gt; resp = client.get().uri(&quot;/get/user/list&quot;)
+                .header(&quot;token&quot;, TOKEN)
+                .cookie(&quot;JSESSIONID&quot;, JSESSIONID)
+                .retrieve()
+                .bodyToMono(R.class);
+
+        System.out.println(&quot;resp = &quot; + resp.block());
+    }
+</code></pre>
+<h3 id="get请求">GET请求</h3>
+<ol>
+<li>使用使用placeholder传递参数</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 使用placeholder传递参数 ,并设置请求头和cookie
+     */
+    @Test
+    public void testGetUserBYId() {
+        Mono&lt;R&gt; resp = client.get()
+                // 多个参数也可以直接放到map中,参数名与placeholder对应上即可
+                .uri(&quot;/get/user/id?uid={uid}&quot;, 4) // 使用占位符
+                .retrieve()
+                .bodyToMono(R.class);
+        System.out.println(&quot;resp = &quot; + resp.block());
+    }
+</code></pre>
+<ol start="2">
+<li>使用uriBuilder传递参数</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 使用uriBuilder传递参数
+     */
+    @Test
+    public void testGet2() {
+        Mono&lt;String&gt; resp = WebClient.create()
+                .get()
+                .uri(uriBuilder -&gt; uriBuilder
+                        .scheme(&quot;http&quot;)
+                        .host(&quot;weathernew.pae.baidu.com&quot;)
+                        .path(&quot;/weathernew/pc&quot;)
+                        .queryParam(&quot;query&quot;, &quot;深圳天气&quot;)
+                        .queryParam(&quot;srcid&quot;, 4982)
+                        .queryParam(&quot;city_name&quot;, &quot;香港&quot;)
+                        .queryParam(&quot;province_name&quot;, &quot;香港&quot;)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class);
+        log.info(&quot;result:{}&quot;, resp.block());
+    }
+</code></pre>
+<h3 id="post请求">POST请求</h3>
+<ol>
+<li>表单提交</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 表单提交
+     */
+    @Test
+    public void testPostUserByForm() {
+        MultiValueMap&lt;String, String&gt; formData = new LinkedMultiValueMap&lt;&gt;();
+        formData.add(&quot;uid&quot;, &quot;4&quot;);
+        formData.add(&quot;username&quot;, &quot;相柳&quot;);
+        formData.add(&quot;age&quot;, &quot;14&quot;);
+        formData.add(&quot;address&quot;, &quot;梧桐山&quot;);
+
+        Mono&lt;R&gt; resp = client.post()
+                .uri(&quot;post/user/addByForm&quot;)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(BodyInserters.fromFormData(formData))
+                .retrieve().bodyToMono(R.class);
+
+        log.info(&quot;result:{}&quot;, resp.block());
+    }
+</code></pre>
+<ol start="2">
+<li>JSON格式数据提交</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * JSON提交数据
+     */
+    @Test
+    public void testPostUserByJson() {
+        User user = new User().setUid(5).setUsername(&quot;八岐大蛇&quot;).setAge(119).setAddress(&quot;东海&quot;);
+
+        //  1. 通过bean方式
+        Mono&lt;R&gt; resp1 = client.post()
+                .uri(&quot;post/user/addByJson&quot;)
+                .contentType(MediaType.APPLICATION_JSON)
+                // 使用bean方式提交JSON数据
+                .body(Mono.just(user), User.class)
+                .retrieve().bodyToMono(R.class);
+
+        // 2. 通过JSON字符串
+        Mono&lt;R&gt; resp2 = client.post()
+                .uri(&quot;post/user/addByJson&quot;)
+                .contentType(MediaType.APPLICATION_JSON)
+                // 使用bean方式提交JSON数据
+                .body(BodyInserters.fromValue(JSON.toJSONString(user)))
+                .retrieve().bodyToMono(R.class);
+
+        log.info(&quot;\nresult1:{}&quot;, resp1.block());
+        log.info(&quot;\nresult2:{}&quot;, resp2.block());
+    }
+</code></pre>
+<h3 id="上传文件-请求异常处理">上传文件, 请求异常处理</h3>
+<ol>
+<li>retrieve()</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 上传文件  设置异常处理
+     * &lt;p&gt;
+     * onStatus根据status code进行异常适配
+     * doOnError异常适配
+     * onErrorReturn返回默认值
+     */
+    @Test
+    public void testUploadFile() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+
+//        HttpEntity&lt;ClassPathResource&gt; entity1 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;yuque_diagram.jpg&quot;), headers);
+        HttpEntity&lt;ClassPathResource&gt; entity1 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;yuque_diagram.jpg&quot;));
+//        HttpEntity&lt;ClassPathResource&gt; entity2 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;线程类图.png&quot;), headers);
+        HttpEntity&lt;ClassPathResource&gt; entity2 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;线程类图.png&quot;));
+        HttpEntity&lt;ClassPathResource&gt; entity3 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;acane_madder - 庭園にて。.mp3&quot;));
+
+        MultiValueMap&lt;String, Object&gt; parts = new LinkedMultiValueMap&lt;&gt;();
+//        parts.add(&quot;file&quot;, entity1);
+        parts.add(&quot;file&quot;, entity2);
+
+        WebClient.ResponseSpec responseSpec = client.post()
+                .uri(&quot;/file/up1&quot;)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(BodyInserters.fromMultipartData(parts))
+                .retrieve();
+
+        Mono&lt;R&gt; onReturn = responseSpec.onStatus(
+                HttpStatus::is4xxClientError, resp -&gt; {
+                    log.error(&quot;error:{}, msg:{}&quot;, resp.statusCode().value(), resp.statusCode().getReasonPhrase());
+                    return Mono.error(new RuntimeException(resp.statusCode().value() + &quot; : &quot; + resp.statusCode().getReasonPhrase()));
+                }
+        )
+                .bodyToMono(R.class)
+                .doOnError(
+                        WebClientResponseException.class, err -&gt; {
+                            log.info(&quot;ERROR status:{}, msg:{}&quot;, err.getRawStatusCode(), err.getResponseBodyAsString());
+                            throw new RuntimeException(err.getMessage());
+                        }
+                )
+                .onErrorReturn(R.fail(&quot;网络异常&quot;));
+
+        log.info(&quot;\nresult: {}&quot;, onReturn.block());
+    }
+</code></pre>
+<ol start="2">
+<li>exchangeToMono()</li>
+</ol>
+<pre><code class="language-Java">    @Test
+    public void testUploadFile2() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+
+//        HttpEntity&lt;ClassPathResource&gt; entity1 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;yuque_diagram.jpg&quot;), headers);
+        HttpEntity&lt;ClassPathResource&gt; entity1 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;yuque_diagram.jpg&quot;));
+//        HttpEntity&lt;ClassPathResource&gt; entity2 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;线程类图.png&quot;), headers);
+        HttpEntity&lt;ClassPathResource&gt; entity2 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;线程类图.png&quot;));
+        HttpEntity&lt;ClassPathResource&gt; entity3 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;acane_madder - 庭園にて。.mp3&quot;));
+
+        MultiValueMap&lt;String, Object&gt; parts = new LinkedMultiValueMap&lt;&gt;();
+        parts.add(&quot;file&quot;, entity1);
+        parts.add(&quot;file&quot;, entity2);
+        parts.add(&quot;file&quot;, entity3);
+
+        Mono&lt;Serializable&gt; serializableMono = client.post()
+                .uri(&quot;/file/up1?isErr={isErr}&quot;, &quot;isErr&quot;)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(BodyInserters.fromMultipartData(parts))
+                .exchangeToMono(
+                        resp -&gt; {
+                            if (resp.statusCode().equals(HttpStatus.OK)) {
+                                return resp.bodyToMono(R.class);
+                            } else if (resp.statusCode().is4xxClientError()) {
+                                return Mono.error(new RuntimeException(resp.statusCode().value() + &quot; : &quot; + resp.statusCode().getReasonPhrase()));
+                            } else {
+                                return resp.createException().flatMap(Mono::error);
+                            }
+                        }
+                );
+        R block = ((R) serializableMono.block());
+        System.out.println(&quot;block = &quot; + block);
+    }
+</code></pre>
+<blockquote>
+<p><a href="https://github.com/tanglinghan/demo-collection/tree/main/http-demo">代码</a></p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux - 用户管理]]></title>
+        <id>https://wulilinghan.github.io/post/linux-user-manager/</id>
+        <link href="https://wulilinghan.github.io/post/linux-user-manager/">
+        </link>
+        <updated>2020-04-22T15:09:10.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7">一： 创建用户</a></li>
+<li><a href="#%E4%BA%8C-%E7%94%A8%E6%88%B7%E5%8F%A3%E4%BB%A4%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81">二： 用户口令(设置密码)</a></li>
+<li><a href="#%E4%B8%89%E4%BF%AE%E6%94%B9%E5%B8%90%E5%8F%B7">三：修改帐号</a></li>
+<li><a href="#%E5%9B%9B%E5%88%A0%E9%99%A4%E5%B8%90%E5%8F%B7">四：删除帐号</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="一-创建用户">一： 创建用户</h2>
+<p><code>useradd [options] [username]</code></p>
+<blockquote>
+<p>参数说明：</p>
+<p>[options]选项:</p>
+<blockquote>
+<p>-c comment 指定一段注释性描述。<br>
+-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。<br>
+-g 用户组 指定用户所属的用户组。<br>
+-G 用户组，用户组 指定用户所属的附加组。<br>
+-s Shell文件 指定用户的登录Shell。<br>
+-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</p>
+</blockquote>
+<p>[username]用户名:</p>
+<blockquote>
+<p>指定新账号的登录名</p>
+</blockquote>
+</blockquote>
+<p>举例：<code>useradd -d /home/appuser  appuser</code></p>
+<p>创建一个名为 appuser 的帐号，并设置用户主目录为/home/appuser</p>
+<h2 id="二-用户口令设置密码">二： 用户口令(设置密码)</h2>
+<p>指定和修改用户口令的命令是passwd。root用户可以为自己和其他用户指定口令，普通用户只能用它修改自己的口令。<br>
+<code>passwd  [options] [username]</code></p>
+<blockquote>
+<p>可使用的选项：</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>-l 锁定口令，即禁用账号。<br>
+-u 口令解锁。<br>
+-d 使账号无口令。<br>
+-f 强迫用户下次登录时修改口令。</p>
+</blockquote>
+<p>如果默认用户名，则修改当前用户的口令。</p>
+</blockquote>
+<p>举例，假设当前登录用户是appuser，则下面的命令修改该用户自己的口令：</p>
+<pre><code class="language-shell">$ passwd 
+Changing password for user appuser.
+Changing password for appuser.
+(current) UNIX password:******
+New password:******
+Retype new password::******* 
+</code></pre>
+<p>如果当前登录用户是root用户，可以用下列形式指定任何用户的口令：</p>
+<pre><code class="language-shell"># passwd appuser 
+Changing password for user appuser.
+New password:******* 
+Retype new password::*******
+passwd: all authentication tokens updated successfully.
+</code></pre>
+<p>为用户指定空口令时，执行下列形式的命令：<br>
+<code>passwd -d appuser</code><br>
+此命令将用户 appuser 的口令删除，这样用户 appuser 下一次登录时，系统就不再允许该用户登录了。</p>
+<p>passwd 命令还可以用 -l(lock) 选项锁定某一用户，使其不能登录，例如：<br>
+<code>passwd -l appuser</code></p>
+<h2 id="三修改帐号">三：修改帐号</h2>
+<p>修改用户账号就是根据实际情况更改用户的有关属性，如用户号、主目录、用户组、登录Shell等。<br>
+<code>usermod [options] [username]</code><br>
+常用的选项包括-c, -d, -m, -g, -G, -s, -u以及-o等，这些选项的意义与useradd命令中的选项一样，可以为用户指定新的资源值。</p>
+<p>另外，有些系统可以使用选项：<code>-l [newUsername]</code></p>
+<blockquote>
+<p>这个选项指定一个新的账号，即将原来的用户名改为新的用户名。</p>
+</blockquote>
+<p>例如：<code>usermod -s /bin/ksh -d /home/z –g developer sam</code><br>
+此命令将用户sam的登录Shell修改为ksh，主目录改为/home/z，用户组改为developer。</p>
+<h2 id="四删除帐号">四：删除帐号</h2>
+<p>如果一个用户的账号不再使用，可以从系统中删除。删除用户账号就是要将/etc/passwd等系统文件中的该用户记录删除，必要时还删除用户的主目录。<br>
+删除一个已有的用户账号使用<code>userdel</code>命令，其格式如下：<br>
+<code>userdel [options] [username]</code><br>
+常用的选项是<code>-r</code>，它的作用是把用户的主目录一起删除。</p>
+<p>例如：<code>userdel -r sam</code><br>
+此命令删除用户sam在系统文件中（主要是/etc/passwd, /etc/shadow, /etc/group等）的记录，同时删除用户的主目录。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux - 常用命令]]></title>
+        <id>https://wulilinghan.github.io/post/commonly-used-commands/</id>
+        <link href="https://wulilinghan.github.io/post/commonly-used-commands/">
+        </link>
+        <updated>2020-04-12T14:10:30.000Z</updated>
+        <content type="html"><![CDATA[<p>操作系统: <code>CentOS 7.6</code><br>
+<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4">基本命令</a></li>
+<li><a href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7">切换用户</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE">文件/目录权限设置</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F">查看当前目录下各文件夹占用空间大小</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B-linux-%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC%E4%BB%A5%E5%8F%8A%E7%B3%BB%E7%BB%9F%E4%BD%8D%E6%95%B0%E5%A4%87%E6%B3%A8x86_64-%E8%A1%A8%E7%A4%BA-64-%E4%BD%8D%E7%B3%BB%E7%BB%9F-i686-i386-%E8%A1%A8%E7%A4%BA-32-%E4%BD%8D%E7%B3%BB%E7%BB%9F">查看 Linux 内核版本以及系统位数（备注：x86_64 表示 64 位系统， i686 i386 表示 32 位系统）</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC">查看系统版本</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B-targz-tgz">文件解压 tar.gz / tgz</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9B%B8%E5%85%B3">防火墙相关</a></li>
+<li><a href="#%E9%87%8D%E5%90%AF%E9%98%B2%E7%81%AB%E5%A2%99">重启防火墙</a></li>
+<li><a href="#%E5%BC%80%E6%94%BE%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3">开放指定端口</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BC%80%E6%94%BE%E7%9A%84%E7%AB%AF%E5%8F%A3">查看开放的端口</a></li>
+<li><a href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3">关闭防火墙端口</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B9%8B%E9%97%B4%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93">服务器之间文件传输</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E4%BF%A1%E6%81%AF">查看磁盘信息</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E6%9C%89%E7%A1%AC%E7%9B%98%E5%8F%8A%E5%88%86%E5%8C%BA">查看已有硬盘及分区</a></li>
+<li><a href="#%E6%90%9C%E7%B4%A2%E8%BF%9B%E7%A8%8B">搜索进程</a></li>
+<li><a href="#%E5%90%8E%E5%8F%B0%E5%90%AF%E5%8A%A8java%E8%BF%9B%E7%A8%8B">后台启动java进程</a></li>
+<li><a href="#%E6%89%B9%E9%87%8F%E6%9D%80%E6%AD%BB%E7%AD%9B%E9%80%89%E8%BF%9B%E7%A8%8B">批量杀死筛选进程</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E7%94%A8cpu%E8%B5%84%E6%BA%90%E6%9C%80%E5%A4%9A%E7%9A%8410%E4%B8%AA%E8%BF%9B%E7%A8%8B%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4%E7%BB%84%E5%90%88">获取占用CPU资源最多的10个进程，可以使用如下命令组合:</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90%E6%9C%80%E5%A4%9A%E7%9A%8410%E4%B8%AA%E8%BF%9B%E7%A8%8B%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4%E7%BB%84%E5%90%88">获取占用内存资源最多的10个进程，可以使用如下命令组合</a></li>
+<li><a href="#%E6%A0%B9%E6%8D%AEpid%E6%9F%A5%E7%9C%8B%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BD%8D%E7%BD%AE">根据PID查看程序运行的位置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h3 id="基本命令">基本命令</h3>
+<pre><code>进入某文件夹 cd 
+浏览目录 ls/ls -l/ll
+创建文件夹  mkdir data
+          mkdir -p /los/data  -p递归创建
+创建文件 touch aaa.txt
+编辑文件 vi/vim aaa.txt
+删除文件 rm aaa.txt
+删除文件/文件夹 rm -rf [目录或文件]
+查看当前路径 pwd
+
+查看当前时间   date
+设置时区  cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+查看IP地址  ip addr
+
+</code></pre>
+<h3 id="切换用户">切换用户</h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>su - [用户名]</td>
+<td>切换用户，并且切换目录</td>
+<td>- 可以切换到用户的家目录，否则保持位置不变su 不接用户名可切换到root</td>
+</tr>
+<tr>
+<td>2</td>
+<td>exit</td>
+<td>退出当前登陆账号</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件目录权限设置">文件/目录权限设置</h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>命令格式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>chown</td>
+<td>chown 用户名 文件名/目录名</td>
+<td>修改拥有者</td>
+</tr>
+<tr>
+<td>2</td>
+<td>chgrp</td>
+<td>chgrp –R 组名 文件名/目录名</td>
+<td>修改组</td>
+</tr>
+<tr>
+<td>3</td>
+<td>chmod</td>
+<td>chmod –R 755 文件名/目录名</td>
+<td>修改权限</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>-R 递归设置<br>
+chown -R bfpuser ROOT       将文件夹ROOT拥有者改为bfpuser<br>
+chmod +x ./*.sh                   给当前目录sh文件添加可执行权限<br>
+chmod 444 ./index.html        设置index.html文件权限为只读<br>
+chmod在设置权限时，可以简单的设置<strong>三个数字分别</strong>对应 <strong>owner-group-other</strong> 的权限。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>命令格式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>w</td>
+<td>x</td>
+<td>用户名 文件名/目录名</td>
+</tr>
+<tr>
+<td>2</td>
+<td>chgrp</td>
+<td>chgrp –R 组名 文件名/目录名</td>
+<td>修改组</td>
+</tr>
+<tr>
+<td>3</td>
+<td>chmod</td>
+<td>chmod –R 755 文件名/目录名</td>
+<td>修改权限</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+  <tr>
+    <th colspan="3">owner</th>
+    <th colspan="3">group</th>
+    <th colspan="3">other</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>r</td>
+    <td>w</td>
+    <td>x</td>
+    <td>r</td>
+    <td>w</td>
+    <td>x</td>
+    <td>r</td>
+    <td>w</td>
+    <td>x</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>2</td>
+    <td>1</td>
+    <td>4</td>
+    <td>2</td>
+    <td>1</td>
+    <td>4</td>
+    <td>2</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>rwx</td>
+    <td>7</td>
+    <td>421</td>
+    <td></td>
+    <td>rw-</td>
+    <td>6</td>
+    <td>420</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>r-x</td>
+    <td>5</td>
+    <td>401</td>
+    <td></td>
+    <td>r--</td>
+    <td>4</td>
+    <td>400</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>-wx</td>
+    <td>3</td>
+    <td>021</td>
+    <td></td>
+    <td>-w-</td>
+    <td>2</td>
+    <td>020</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>--x</td>
+    <td>1</td>
+    <td>001</td>
+    <td></td>
+    <td>---</td>
+    <td>0</td>
+    <td>000</td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+<h3 id="查看当前目录下各文件夹占用空间大小">查看当前目录下各文件夹占用空间大小</h3>
+<p><code>du -h --max-depth=1 ./  </code></p>
+<h3 id="查看-linux-内核版本以及系统位数备注x86_64-表示-64-位系统-i686-i386-表示-32-位系统">查看 Linux 内核版本以及系统位数（备注：x86_64 表示 64 位系统， i686 i386 表示 32 位系统）</h3>
+<p><code>uname -a</code></p>
+<h3 id="查看系统版本">查看系统版本</h3>
+<p><code>lsb_release -a</code></p>
+<blockquote>
+<p>这个命令适用于所有的Linux发行版，包括Redhat、SuSE、Debian…等发行版。</p>
+<p>[root@localhost ~]# lsb_release -a<br>
+LSB Version:    :core-4.1-amd64:core-4.1-noarch<br>
+Distributor ID: CentOS<br>
+Description:    CentOS Linux release 7.6.1810 (Core)<br>
+Release:        7.6.1810<br>
+Codename:       Core</p>
+</blockquote>
+<p><code>cat /etc/redhat-release</code></p>
+<blockquote>
+<p>这种方法只适合Redhat系的Linux。</p>
+<p>[root@localhost ~]# cat /etc/redhat-release<br>
+CentOS Linux release 7.9.2009 (Core)</p>
+</blockquote>
+<h3 id="文件解压-targz-tgz">文件解压 tar.gz / tgz</h3>
+<p><code>tar -zxvf /source/kernel.tgz -C /source/linux-2.6.29</code></p>
+<h3 id="防火墙相关">防火墙相关</h3>
+<pre><code>systemctl start firewalld
+systemctl status firewalld 
+systemctl stop firewalld 
+</code></pre>
+<h3 id="重启防火墙">重启防火墙</h3>
+<p><code>firewall-cmd --reload</code></p>
+<h3 id="开放指定端口">开放指定端口</h3>
+<pre><code>firewall-cmd --zone=public --add-port=3306/tcp --permanent
+firewall-cmd --zone=public --add-port=6379/tcp --permanent
+firewall-cmd --zone=public --add-port=15672/tcp --permanent
+firewall-cmd --zone=public --add-port=5672/tcp --permanent
+firewall-cmd --zone=public --add-port=27017/tcp --permanent
+firewall-cmd --zone=public --add-port=8081/tcp --permanent 
+</code></pre>
+<blockquote>
+<p>命令含义：<br>
+--zone #作用域<br>
+--add-port=1935/tcp  #添加端口，格式为：端口/通讯协议<br>
+--permanent  #永久生效，没有此参数重启后失效</p>
+</blockquote>
+<h3 id="查看开放的端口">查看开放的端口</h3>
+<p><code>firewall-cmd --list-ports</code></p>
+<h3 id="关闭防火墙端口">关闭防火墙端口</h3>
+<p><code>firewall-cmd --zone=public --remove-port=27017/tcp --permanent</code></p>
+<h3 id="服务器之间文件传输">服务器之间文件传输</h3>
+<ol>
+<li>scp (参数不可以带密码</li>
+</ol>
+<pre><code>1. 22默认端口
+scp  -v -r [文件名称] root@[目标ip]:[目标服务器路径]
+例如: scp -v -r /usr/local/front root@10.10.66.154:/home/data/
+
+2. 非22默认端口
+scp -P [remote_port] -v -r [文件名称] root@[目标ip]:[目标服务器路径]
+</code></pre>
+<blockquote>
+<p>-v: 用来显示进度 . 可以用来查看连接 , 认证 , 或是配置错误 .<br>
+-r: 递归复制整个目录。<br>
+此命令不支持参数带密码</p>
+</blockquote>
+<ol start="2">
+<li>sshpass (参数可以带密码)</li>
+</ol>
+<pre><code>yum install -y sshpass
+
+1. 22端口
+远程连接主机：
+sshpass -p [remote_pass] ssh [root]@[remote_ip]
+
+本地执行远程机器的命令:
+sshpass -p [remote_pass] ssh [root]@[remote_ip] &quot;/root/xx.sh&quot;
+
+从密码文件读取文件内容作为密码去远程连接主机:
+sshpass -f aaa.txt ssh [root]@[remote_ip]
+
+2. 非22端口
+sshpass -p [remote_pass] ssh -p [remote_port] [root]@[remote_ip] &quot;/root/xx.sh&quot;
+
+sshpass -p [remote_pass] scp -P [remote_port] 源文件 目的文件
+</code></pre>
+<ol start="3">
+<li>rsync</li>
+</ol>
+<blockquote>
+<p>yum install -y rsync<br>
+注意，传输的双方都必须安装 rsync。</p>
+</blockquote>
+<pre><code>rsync -r [source1] [source2] [destination]
+
+source目录表示源目录，destination表示目标目录。
+上面命令中，source1、source2都会被同步到destination目录。
+-r表示递归，即包含子目录。注意，-r是必须的，否则 rsync 运行不会成功。
+
+-a参数可以替代-r，除了可以递归同步以外，还可以同步元信息（比如修改时间、权限等）。
+由于 rsync 默认使用文件大小和修改时间决定文件是否需要更新，所以-a比-r更有用。
+下面的用法才是常见的写法：
+rsync -a [source]... [destination]
+</code></pre>
+<h3 id="查看磁盘信息">查看磁盘信息</h3>
+<pre><code>df -hT 
+df -h
+fdisk -l
+</code></pre>
+<h3 id="查看已有硬盘及分区">查看已有硬盘及分区</h3>
+<p><code>lsblk</code></p>
+<h3 id="搜索进程">搜索进程</h3>
+<pre><code class="language-shell">### 1. 根据端口号查进程 
+netstat -nap | grep [port]
+### 2. 根据进程号PID查端口
+netstat -nap | grep [PID]
+### 3. 根据服务名查看进程 PID (第二列是PID)
+ps -ef | grep [服务名称] 
+</code></pre>
+<h3 id="后台启动java进程">后台启动java进程</h3>
+<p><code>nohup java -jar tabifcp-eureka-2.0.3.RELEASE.jar &gt;./logs/tabifcp-eureka.log 2&gt;&amp;1 &amp;</code><br>
+或者<br>
+<code>nohup java -jar server-eureka-2.0.3.RELEASE.jar &amp;&gt;./logs/server-eureka.log  &amp;</code><br>
+查看进程内存使用情况     返回的数值单位为KB <a href="https://www.dute.org/datastore-exchange?ref=search">在线单位换算</a><br>
+<code>cat /proc/[进程PID]/status | grep -e VmRSS | awk 'NR==1 {print $2}'</code><br>
+或者<br>
+<code>top -p [进程PID]</code></p>
+<blockquote>
+<p>top可以动态查看进程内存占用情况</p>
+<p>[root@localhost app]# top<br>
+top - 20:45:47 up 45 days, 23:53,  1 user,  load average: 0.08, 0.05, 0.05<br>
+Tasks: 158 total,   1 running, 157 sleeping,   0 stopped,   0 zombie<br>
+%Cpu(s):  4.8 us,  6.2 sy,  0.0 ni, 89.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st<br>
+KiB Mem :  3879808 total,   134732 free,  1788096 used,  1956980 buff/cache<br>
+KiB Swap:  1048572 total,   803864 free,   244708 used.  1641764 avail Mem</p>
+<p>PID     USER    PR  NI    VIRT      RES    SHR  S  %CPU %MEM  TIME+ COMMAND<br>
+16776  root      20   0  162104   2316   1592  R   0.7    0.1   0:00.05    top<br>
+1         root      20   0  191136   3032   1664  S   0.3    0.1  54:28.12  systemd</p>
+</blockquote>
+<h3 id="批量杀死筛选进程">批量杀死筛选进程</h3>
+<p><code>ps -ef | grep [关键字] | grep -v grep | awk '{print $2}' | xargs kill -9 </code></p>
+<h3 id="获取占用cpu资源最多的10个进程可以使用如下命令组合">获取占用CPU资源最多的10个进程，可以使用如下命令组合:</h3>
+<p><code>ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head</code></p>
+<h3 id="获取占用内存资源最多的10个进程可以使用如下命令组合">获取占用内存资源最多的10个进程，可以使用如下命令组合</h3>
+<p><code>ps aux|head -1;ps aux|grep -v PID|sort -rn -k +4|head</code><br>
+或者<br>
+<code>ps aux | sort -k4,4nr | head -n 10</code></p>
+<h3 id="根据pid查看程序运行的位置">根据PID查看程序运行的位置</h3>
+<p><code>ll /proc/[PID]</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux - 命令行测试网速/带宽]]></title>
+        <id>https://wulilinghan.github.io/post/centos-speedtest/</id>
+        <link href="https://wulilinghan.github.io/post/centos-speedtest/">
+        </link>
+        <updated>2020-04-03T07:52:39.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#%E5%AE%89%E8%A3%85speedtest-cli">安装speedtest-cli</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8speedtest-cli%E6%B5%8B%E8%AF%95%E7%BD%91%E9%80%9F">使用speedtest-cli测试网速</a></li>
+</ul>
+</p>
+<p>操作系统:：<code>CentOS 7.6 64bit</code></p>
+<h1 id="安装speedtest-cli">安装speedtest-cli</h1>
+<p>speedtest-cli是一个用Python编写的轻量级Linux命令行工具，在Python2.4至3.4版本下均可运行。它基于Speedtest.net的基础架构来测量网络的上/下行速率。安装speedtest-cli很简单——只需要下载其Python脚本文件。</p>
+<pre><code> wget https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
+ chmod +rx speedtest.py
+ sudo mv speedtest.py /usr/local/bin/speedtest-cli
+ sudo chown root:root /usr/local/bin/speedtest-cli
+</code></pre>
+<h1 id="使用speedtest-cli测试网速">使用speedtest-cli测试网速</h1>
+<p>使用speedtest-cli命令也很简单，它不需要任何参数即可工作。</p>
+<pre><code>speedtest-cli
+</code></pre>
+<p>输入这个命令后，它会自动发现离你最近的Speedtest.net服务器（地理距离），然后打印出测试的网络上/下行速率。 注意：由于有些测试点是国外，需多次测试，结果才正确。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux - 修改SSH默认连接端口]]></title>
+        <id>https://wulilinghan.github.io/post/changeSSHPort/</id>
+        <link href="https://wulilinghan.github.io/post/changeSSHPort/">
+        </link>
+        <updated>2020-03-20T12:12:05.000Z</updated>
+        <content type="html"><![CDATA[<p>操作系统: <code>CentOS 7.6</code></p>
+<p><code>vim /etc/ssh/sshd_config</code></p>
+<pre><code class="language-shell">[root@localhost ~]# vim /etc/ssh/sshd_config
+#       $OpenBSD: sshd_config,v 1.100 2016/08/15 12:32:04 naddy Exp $
+
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/local/bin:/usr/bin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
+
+# If you want to change the port on a SELinux system, you have to tell
+# SELinux about this change.
+# semanage port -a -t ssh_port_t -p tcp #PORTNUMBER
+#
+Port 22
+Port 2222
+</code></pre>
+<p>sshd_config文件中添加一个端口号2222(这里保留22端口，是为了放置假如配置失败的话，还可以使用22端口使用ssh登录，配置完成后，可以删除22端口)。<br>
+开启防火墙的，把端口放开</p>
+<pre><code class="language-shell"># 开放2222端口
+firewall-cmd --zone=public --add-port=2222/tcp --permanent
+# 重启防火墙
+firewall-cmd --reload 
+# 重启sshd服务
+systemctl restart sshd
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux - 安装RabbitMQ]]></title>
+        <id>https://wulilinghan.github.io/post/linux-install-rabbitmq/</id>
+        <link href="https://wulilinghan.github.io/post/linux-install-rabbitmq/">
+        </link>
+        <updated>2020-03-19T07:28:56.000Z</updated>
+        <content type="html"><![CDATA[<p>官方页面: <a href="https://www.rabbitmq.com/download.html">https://www.rabbitmq.com/download.html</a><br>
+不同版本rabbitmq版本支持的erlang版本不同, <a href="https://www.rabbitmq.com/which-erlang.html">点击查看对照表</a><br>
+安装版本:</p>
+<ul>
+<li><a href="https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.8.14/rabbitmq-server-generic-unix-3.8.14.tar.xz">rabbitmq-server-generic-unix-3.8.14.tar</a></li>
+<li>otp_src_23.2.7.tar.gz</li>
+</ul>
+<ol>
+<li>
+<h2 id="安装依赖环境">安装依赖环境</h2>
+</li>
+</ol>
+<pre><code> yum install gcc glibc-devel make ncurses-devel openssl-devel xmlto
+</code></pre>
+<ol start="2">
+<li>
+<h2 id="安装-erlang">安装 erlang`</h2>
+</li>
+</ol>
+<pre><code>tar -zxvf otp_src_23.2.7.tar.gz
+cd otp_src_23.2.7
+# 编译安装
+./configure --prefix=/usr/local/erlang
+make &amp;&amp; make install
+# 测试是否安装成功
+cd /usr/local/erlang/bin/ 
+ ./erl
+</code></pre>
+<p><code>ctrl+c</code>再按<code>a</code>退出, 配置环境变量:</p>
+<pre><code> vim /etc/profile
+ # 按 i 进入编辑模式, 末尾加上
+ export PATH=$PATH:/usr/local/erlang/bin
+ # shift+冒号 进入底行命令模式 输入 wq 保存退出
+</code></pre>
+<ol>
+<li>
+<h2 id="安装rabbitmq">安装RabbitMQ</h2>
+</li>
+</ol>
+<pre><code>tar -xvf rabbitmq-server-generic-unix-3.8.14.tar
+# 个人习惯 将文件夹命名为rabbitmq
+mv rabbitmq_server-3.8.14 rabbitmq
+# 配置rabbitmq环境变量
+vim /etc/profile
+export PATH=$PATH:/usr/local/rabbitmq/sbin
+source /etc/profile
+</code></pre>
+<h3 id="基本命令">基本命令:</h3>
+<pre><code># 启动
+rabbitmq-server -detached
+# 关闭
+rabbitmqctl stop
+# 查看状态
+rabbitmqctl status
+</code></pre>
+<p>启动web页面插件: <code>rabbitmq-plugins enable rabbitmq_management</code><br>
+访问管理页面：<a href="http://127.0.0.1:15672">http://127.0.0.1:15672</a>   web端口默认为15672</p>
+<h3 id="账号配置">账号配置</h3>
+<p>rabbitmq有一个默认的用户名和密码，<code>guest</code>和<code>guest</code>, 但该用户名和密码只允许本地访问，如果是远程操作的话，需要创建新的用户名和密码；</p>
+<pre><code># 添加用户，后面两个参数分别是用户名和密码 
+rabbitmqctl add_user [username] [passwd]
+# 添加权限  
+rabbitmqctl set_permissions -p / [username] &quot;.*&quot; &quot;.*&quot; &quot;.*&quot; 
+# 修改用户角色,将用户设为管理员
+rabbitmqctl set_user_tags [username] administrator 
+</code></pre>
+<hr>
+<p>以下内容有问题, 待补充........</p>
+<ol>
+<li>
+<h2 id="修改默认端口">修改默认端口</h2>
+</li>
+</ol>
+<p><a href="https://github.com/rabbitmq/rabbitmq-server/blob/v3.8.x/deps/rabbit/docs/rabbitmq.conf.example">https://github.com/rabbitmq/rabbitmq-server/blob/v3.8.x/deps/rabbit/docs/rabbitmq.conf.example</a><br>
+修改rabbitmq-default</p>
+<pre><code>vim /usr/local/vim rabbitmq/sbin/rabbitmq-defaults
+# 加上这句话
+CONFIG_FILE=${RABBITMQ_HOME}/rabbitmq/etc/rabbitmq/rabbitmq.conf
+</code></pre>
+<p>在安装目录<code>etc/rabbitmq/</code>添加配置文件<code>rabbitmq.conf</code><br>
+<code>cd /usr/local/rabbitmq/etc/rabbitmq</code>然后<code>vim rabbitmq.conf</code>, 按<code>i</code>进入编辑模式, 修改以下内容, shift+冒号进入底行命令模式输入<code>wq</code>, 按<code>enter</code>保存退出</p>
+<pre><code>#数据管理端口（默认端口为5672）
+listeners.tcp.default=5673
+#界面管理端口（默认端口为15672）
+management.tcp.port=25672
+management.tcp.ip=0.0.0.0
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux - 普通用户环境变量不生效问题]]></title>
+        <id>https://wulilinghan.github.io/post/linux-environment-variable/</id>
+        <link href="https://wulilinghan.github.io/post/linux-environment-variable/">
+        </link>
+        <updated>2020-03-18T09:08:22.000Z</updated>
+        <content type="html"><![CDATA[<p>有时候在<code>/etc/profile</code>配置完jdk环境，发现root用户可以使用java -version生效，而普通用户会提示java命令未找到。</p>
+<p>环境变量配置文件大致有<code>/etc/profile</code>，<code>/etc/bashrc</code>，<code>~/.bash_profile</code>，<code>~/.bashrc</code>等等。</p>
+<ol>
+<li>配置文件有两个级别，系统级(/etc)和用户级(~/), 每次调用优先调用系统级</li>
+<li>profile用于登录式shell，而bashrc用于每个交互式shell</li>
+</ol>
+<p>先来了解几个概念: 交互式shell和非交互式shell，登录shell和非登录shell。</p>
+<p>交互式 shell 指的是<strong>在终端有交互的模式，用户输入命令，并在回车后立即执行的 shell</strong>，这种模式也是大部分情况下用户执行的一种方式，比如 ssh 登录</p>
+<p>非交互式 shell 指的<strong>是 bash shell 以命令脚本的形式执行</strong>，这种模式下，shell 不会和用户有交互，而是读取脚本文件并执行，直到读取到文件 EOF 时结束</p>
+<blockquote>
+<p><a href="https://einverne.github.io/post/2019/01/login-shell-vs-non-login-shell.html">登录式 shell 和非登录式 shell 区别</a></p>
+</blockquote>
+<p><code>/etc/profile</code>，<code>/etc/bashrc</code> 是系统全局环境变量设定<br>
+<code>~/.bash_profile</code>，<code>~/.bashrc</code>用户目录下的私有环境变量设定</p>
+<p>当登入系统时候获得一个shell进程时，其读取环境设定档有三步：</p>
+<ol>
+<li>首先读入的是全局环境变量设定档<code>/etc/profile</code>，然后根据其内容读取额外的设定的文档，如<br>
+<code>/etc/profile.d</code></li>
+<li>然后根据不同使用者帐号，去其家目录读取<code>~/.bash_profile</code>，如果这读取不了就读取<code>~/.bash_login</code>，这个也读取不了才会读取<code>~/.profile</code>，这三个文档设定基本上是一样的，读取有优先关系</li>
+<li>然后在根据用户帐号读取<code>~/.bashrc</code><br>
+<img src="https://wulilinghan.github.io/post-images/1619867821467.png" alt="" loading="lazy"></li>
+</ol>
+<p>用  /etc/profile 和 ~/.bashrc，能够解决大部分软件的环境变量问题， /etc/profile只在用户登陆时执行一次，修改后并且source后，不生效，可打开新窗口试试；~/.bashrc在用户每次登陆以及打开终端窗口时都会执行。每次修改后须要从新source，<code>source /etc/profile</code>，<code>source ~/.bashrc</code>。</p>
+]]></content>
+    </entry>
+</feed>

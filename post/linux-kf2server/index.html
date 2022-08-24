@@ -1,0 +1,660 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>【教程】Linux系统下搭建KF2服务器 - 唧唧啵啵耶</title>
+<link rel="shortcut icon" href="https://wulilinghan.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://wulilinghan.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://wulilinghan.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="【教程】Linux系统下搭建KF2服务器 - 唧唧啵啵耶 - Atom Feed" href="https://wulilinghan.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="操作系统:：CentOS 7.6 64bit
+规格:：2 核 4 GB
+带宽:：5 Mbit/s 带宽
+操作账户：root
+存储空间：需要至少23G的可用空间
+
+一、安装SteamCMD
+
+1. 安装运行库
+2. 安装SteamCMD
+
+
+..." />
+  <meta property="og:title" content="【教程】Linux系统下搭建KF2服务器 - 唧唧啵啵耶">
+  <meta property="og:description" content="操作系统:：CentOS 7.6 64bit
+规格:：2 核 4 GB
+带宽:：5 Mbit/s 带宽
+操作账户：root
+存储空间：需要至少23G的可用空间
+
+一、安装SteamCMD
+
+1. 安装运行库
+2. 安装SteamCMD
+
+
+..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://wulilinghan.github.io/post/linux-kf2server/" />
+  <meta property="og:image" content="https://wulilinghan.github.io/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="【教程】Linux系统下搭建KF2服务器 - 唧唧啵啵耶">
+  <meta name="twitter:description" content="操作系统:：CentOS 7.6 64bit
+规格:：2 核 4 GB
+带宽:：5 Mbit/s 带宽
+操作账户：root
+存储空间：需要至少23G的可用空间
+
+一、安装SteamCMD
+
+1. 安装运行库
+2. 安装SteamCMD
+
+
+...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://wulilinghan.github.io/post/linux-kf2server/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="https://wulilinghan.github.io/media/css/prism-atom-dark.css">
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://wulilinghan.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      唧唧啵啵耶
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          【教程】Linux系统下搭建KF2服务器
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2021-05-03 · 10 min read</div>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p>操作系统:：<code>CentOS 7.6 64bit</code><br>
+规格:：<code>2 核 4 GB</code><br>
+带宽:：<code>5 Mbit/s 带宽</code><br>
+操作账户：<code>root</code><br>
+存储空间：<code>需要至少23G的可用空间</code></p>
+<p><ul class="markdownIt-TOC">
+<li><a href="#%E4%B8%80-%E5%AE%89%E8%A3%85steamcmd">一、安装SteamCMD</a>
+<ul>
+<li><a href="#1-%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C%E5%BA%93">1. 安装运行库</a></li>
+<li><a href="#2-%E5%AE%89%E8%A3%85steamcmd">2. 安装SteamCMD</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E5%AE%89%E8%A3%85kf2%E6%9C%8D%E5%8A%A1%E7%AB%AF">二、安装KF2服务端</a>
+<ul>
+<li><a href="#1-%E5%90%AF%E5%8A%A8steamcmd%E5%B9%B6%E4%B8%8B%E8%BD%BDkf2server">1. 启动steamcmd并下载KF2Server</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%88%BF%E9%97%B4%E9%85%8D%E7%BD%AE">三、服务器房间配置</a>
+<ul>
+<li><a href="#1-%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E5%90%AF%E5%8A%A8">1. 默认配置启动</a></li>
+<li><a href="#2-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3">2. 配置文件相关</a></li>
+<li><a href="#3-%E5%88%9B%E5%BB%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC">3. 创建启动脚本</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E5%BC%80">四、服务多开</a></li>
+<li><a href="#%E4%BA%94-%E6%9C%8D%E5%8A%A1%E9%87%8D%E5%90%AF">五、服务重启</a></li>
+<li><a href="#%E5%85%AD-%E5%88%9B%E6%84%8F%E5%B7%A5%E5%9D%8A%E8%AE%A2%E9%98%85">六、创意工坊订阅</a></li>
+</ul>
+</p>
+<h1 id="一-安装steamcmd">一、安装SteamCMD</h1>
+<h2 id="1-安装运行库">1. 安装运行库</h2>
+<p>sudo yum -y install glibc.i686<br>
+<img src="https://wulilinghan.github.io/post-images/1620018302295.png" alt="" loading="lazy"></p>
+<h2 id="2-安装steamcmd">2. 安装SteamCMD</h2>
+<blockquote>
+<p>一些基本命令使用</p>
+<ul>
+<li>cd  [目录] 进入某目录 eg: cd /home/steamcmd  进入根路径下home目录下的steamcmd文件夹</li>
+<li>pwd 查看当前路径</li>
+<li>mkdir [文件夹] 创建文件夹 eg: mkdir test  在当前目录下创建test文件夹<br>
+加参数<code>-p</code>可创建多层次文件夹  eg: mkdir -p /home/steamcmd 在根路径下home目录下创建steamcmd文件夹</li>
+<li>ll 查看当前目录文件列表</li>
+</ul>
+</blockquote>
+<pre><code>mkdir -p /home/steamcmd
+cd /home/steamcmd
+# 下载steamcmd
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz --no-check-certificate
+</code></pre>
+<blockquote>
+<p>--no-check-certificate 不检查安全网站证书</p>
+</blockquote>
+<p><img src="https://wulilinghan.github.io/post-images/1620020678285.png" alt="" loading="lazy"><br>
+<code>ll</code>查看一下当前目录，<code>steamcmd_linux.tar.gz</code>下载下来了<br>
+<img src="https://wulilinghan.github.io/post-images/1620020872971.png" alt="" loading="lazy"><br>
+<code>tar -zxf steamcmd_linux.tar.gz</code> 解压<br>
+<img src="https://wulilinghan.github.io/post-images/1620020975168.png" alt="" loading="lazy"></p>
+<h1 id="二-安装kf2服务端">二、安装KF2服务端</h1>
+<h2 id="1-启动steamcmd并下载kf2server">1. 启动steamcmd并下载KF2Server</h2>
+<p>接着上面的目录继续操作，忘了就直接<code>cd /home/steamcmd</code>。</p>
+<pre><code># 启动steam
+./steamcmd.sh
+</code></pre>
+<p><img src="https://wulilinghan.github.io/post-images/1620021415250.png" alt="" loading="lazy"><br>
+等待进度条....<br>
+<img src="https://wulilinghan.github.io/post-images/1620021587192.png" alt="" loading="lazy"></p>
+<pre><code># 匿名登录
+login anonymous
+# 设置安装目录
+force_install_dir ./steamapps/KF2Server/
+# 下载KF2服务器
+app_update 232130 validate
+</code></pre>
+<blockquote>
+<p>实际安装目录也就是<code>/home/steamcmd/steamapps/KF2Server</code><br>
+安装或者升级命令：app_update [steam app id]<br>
+<a href="https://steamdb.keylol.com/search/232130">steam app id 查询</a><br>
+需要升级的话，在命令行加上升级参数: validate</p>
+</blockquote>
+<p><img src="https://wulilinghan.github.io/post-images/1620022883896.png" alt="" loading="lazy"><br>
+<code>Error! App '232130' state is 0x202 after update job.</code>网上一搜好像是说磁盘空间不够。</p>
+<p>含泪扩容......(穷逼如是说</p>
+<p>开始下载了....<br>
+<img src="https://wulilinghan.github.io/post-images/1620027663010.png" alt="" loading="lazy"><br>
+总大小<code>23G</code>左右，慢慢下吧......<br>
+下载完使用<code>quit</code>退出窗口。</p>
+<h1 id="三-服务器房间配置">三、服务器房间配置</h1>
+<h2 id="1-默认配置启动">1. 默认配置启动</h2>
+<p>输入以下命令，启动KF2：<br>
+<code>/home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?AdminPassword=123</code></p>
+<blockquote>
+<p><code>/home/steamcmd/steamapps/KF2Server/Binaries/Win64</code>是你自己的游戏安装路径<br>
+<code>KFGameSteamServer.bin.x86_64</code> 是启动文件<br>
+<code>kf-bioticslab</code> 游戏启动默认地图(生命学实验室)<br>
+<code>AdminPassword</code> web管理页面密码，账号是admin<br>
+<img src="https://wulilinghan.github.io/post-images/1620096922084.png" alt="" loading="lazy"><br>
+问题一<br>
+<img src="https://wulilinghan.github.io/post-images/1620034890774.png" alt="" loading="lazy"><br>
+解决:<br>
+运行命令<code>strings /usr/lib64/libstdc++.so.6 | grep GLIBC</code>检查动态库，发现确实没有&gt; <code>GLIBCXX_3.4.21</code>和<code>GLIBCXX_3.4.20</code>版本，需要升级<code>gcc</code><br>
+<img src="https://wulilinghan.github.io/post-images/1620035055613.png" alt="" loading="lazy"><br>
+这个问题因人而异，可自行<a href="https://blog.csdn.net/CV_Jason/article/details/84034220">网上搜索资料解决</a></p>
+</blockquote>
+<p>第一次启动后会在<code>/home/steamcmd/steamapps/KF2Server/KFGame/Config/</code>目录下生成<code>LinuxServer-KFxxxxx.ini</code>等文件。</p>
+<p>这是启动方式只是临时启动，关闭窗口后游戏也随之关闭了，也方便自己调试地图插件等是否能用。</p>
+<p><strong>配置文件配置好并且启动了服务，客户端怎么连接呢？</strong></p>
+<p>在杀地板客户端，<code>shift+~</code>打开控制台输入<code>open [目标IP]]:7777</code>，如果连接有密码，会提示你输密码，如若在确定服务正常启动的情况下输入回车后<strong>没任何反应，看下服务器的安全组和防火墙是否把相应的端口开放。</strong></p>
+<blockquote>
+<p>eg: open 192.168.1.1:7777<br>
+默认端口7777没改的话，可以不输端口</p>
+</blockquote>
+<p>相关端口：</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Default</th>
+<th>Protocol</th>
+<th>What this option controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Game Port</td>
+<td>7777</td>
+<td>UDP</td>
+<td>This is the main port the game will send connections over</td>
+</tr>
+<tr>
+<td>Query Port</td>
+<td>27015</td>
+<td>UDP</td>
+<td>This port is used to communicate with the Steam Master Server</td>
+</tr>
+<tr>
+<td>Web Admin</td>
+<td>8080</td>
+<td>TCP</td>
+<td>This port is used to connect to your servers web admin page (if turned on)</td>
+</tr>
+<tr>
+<td>Steam Port</td>
+<td>20560</td>
+<td>UDP</td>
+<td></td>
+</tr>
+<tr>
+<td>NTP Port</td>
+<td>123</td>
+<td>UDP</td>
+<td>Weekly Outbreak Only - Internet time lookup to determine correct Outbreak</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><a href="https://wiki.killingfloor2.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Ports">wiki.killingfloor2.com_ports</a></p>
+</blockquote>
+<h2 id="2-配置文件相关">2. 配置文件相关</h2>
+<p>需要关注的一些文件配置(<code>/home/steamcmd/steamapps/KF2Server/KFGame/Config/</code>):</p>
+<ol>
+<li><code>KFWeb.ini</code></li>
+</ol>
+<pre><code>[IpDrv.WebServer]
+# web页面访问端口
+ListenPort=8080
+# 远程网页管理
+bEnabled=true
+</code></pre>
+<blockquote>
+<p>WebAdmin默认是关闭的，这里把它开启，访问地址就是 [IP地址]:[默认是8080]</p>
+</blockquote>
+<ol start="2">
+<li><code>LinuxServer-KFEngine.ini</code></li>
+</ol>
+<pre><code>[URL]
+# 想要多开服务的话，各端口都要改
+# 游戏运行端口
+Port=7777
+# 游戏通讯端口
+PeerPort=7778
+
+# 订阅创意工坊
+# 这一栏配置默认没有，需手动加
+[OnlineSubsystemSteamworks.KFWorkshopSteamworks]
+# 每一行就是一个创意工坊的ID
+# 找到地图ID以后添加好，然后就添加地图名到LinuxServer-KFGame.ini文件地图循环属性里就可以了
+# Killing Pool
+ServerSubscribedWorkshopItems=1210703659
+# KF-China_Temple_insane_edit
+ServerSubscribedWorkshopItems=891319214  
+</code></pre>
+<ol start="3">
+<li><code>LinuxServer-KFGame.ini</code><br>
+这个文件涉及到的参数很多，也是服务器最基本，最重要的参数。包括了，服务器难度，服务器波数，服务器密码，管理员密码，服务器名字，地图循环设置（就是一局打完后地图的投票列表）。</li>
+</ol>
+<pre><code>[Engine.GameInfo]
+MaxPlayers=6
+# 游戏难度 0（普通）1（困难）2（自杀）3（人间炼狱）
+GameDifficulty=3.000000
+
+[Engine.AccessControl]
+# 网页管理web密码 默认为空
+AdminPassword=xxx
+# 房间密码 默认为空
+GamePassword=xxx
+
+[KFGame.KFGameInfo]
+# 对游戏波数进行设置 0（4波）1（7波）2（10波）
+GameLength=2
+
+# 开启将使用你自定义的地图循环列表，而不是官方默认的。开启（True）关闭（False）。只可以使用True（开启）False（关闭）来作为结尾。官方默认是开启（True），所以这项其实你完全不用动。知道有个这玩意就可以了。
+bUseMapList=True
+ActiveMapCycle=0
+# 地图循环列表
+GameMapCycles=(Maps=(&quot;KF-KillingPool&quot;,&quot;KF-China_Temple_insane_edit&quot;,&quot;KF-GiantCityRuins_Original&quot;,&quot;---------------------------------&quot;,&quot;KF-Airship&quot;,&quot;KF-AshwoodAsylum&quot;,&quot;KF-Biolapse&quot;,&quot;KF-Bioticslab&quot;,&quot;KF-BlackForest&quot;,&quot;KF-BurningParis&quot;,&quot;KF-Catacombs&quot;,&quot;KF-ContainmentStation&quot;,&quot;KF-Desolation&quot;,&quot;KF-DieSector&quot;,&quot;KF-Dystopia2029&quot;,&quot;KF-Elysium&quot;,&quot;KF-EvacuationPoint&quot;,&quot;KF-Farmhouse&quot;,&quot;KF-HellmarkStation&quot;,&quot;KF-HostileGrounds&quot;,&quot;KF-InfernalRealm&quot;,&quot;KF-KrampusLair&quot;,&quot;KF-Lockdown&quot;,&quot;KF-MonsterBall&quot;,&quot;KF-Nightmare&quot;,&quot;KF-Nuked&quot;,&quot;KF-Outpost&quot;,&quot;KF-PowerCore_Holdout&quot;,&quot;KF-Prison&quot;,&quot;KF-Sanitarium&quot;,&quot;KF-Santasworkshop&quot;,&quot;KF-ShoppingSpree&quot;,&quot;KF-Spillway&quot;,&quot;KF-SteamFortress&quot;,&quot;KF-TheDescent&quot;,&quot;KF-TragicKingdom&quot;,&quot;KF-VolterManor&quot;,&quot;KF-ZedLanding&quot;))
+
+# 可以使用[imgur](https://imgur.com/register?redirect=%2F)提供的免费图片外链服务或者其他图床服务，也可以自己用nginx做一个文件服务。
+# 这个是公告图片地址 （图片大小必须为512x256像素大小的PNG图片，和原图格式大小相同）
+BannerLink=http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png
+# 这个是公告文字内容
+ServerMOTD=Welcome to our server. \n \n Have fun and good luck!
+# 自定义的链接
+WebsiteLink=http://killingfloor2.com/
+# 这是BannerLink下方的标题
+ClanMotto=This is the clan motto.
+
+[Engine.GameReplicationInfo]
+# 服务器浏览时看到房间名字
+ServerName=Killing Floor 2 Server
+ShortName=KFServer
+</code></pre>
+<h2 id="3-创建启动脚本">3. 创建启动脚本</h2>
+<p>这启动脚本什么的写不写无所谓，启动也就是一行命令的事，</p>
+<ul>
+<li><strong>脚本位置放哪随意，我这里放在steam安装目录下。</strong><br>
+<code>cd /home/steamcmd/</code></li>
+<li><strong>创建kf2_start.sh文件</strong><br>
+<code>touch kf2_start.sh</code></li>
+<li><strong>给kf2_start.sh添加可读可执行权限</strong><br>
+<code>chmod +rx kf2_start.sh</code></li>
+<li><strong>编辑脚本内容，按 <code>i</code> 进入编辑模式</strong><br>
+<code>vim kf2_start.sh</code></li>
+<li><strong>以下是脚本内容</strong></li>
+</ul>
+<pre><code class="language-shell">#!/bin/sh
+# start kf2server
+nohup /home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?GameDifficulty=3?GameLength=2?GamePassword=2333 &gt;/dev/null 2&gt;&amp;1 &amp;
+</code></pre>
+<p>填完后 shift+冒号 进入底行模式 ,输入wq，按enter键保存退出。</p>
+<blockquote>
+<p><code>kf-bioticslab</code>  默认启动地图(生命学实验室)<br>
+后面的启动参数可加可不加，配置文件也可以配置。</p>
+<p><code>GameDifficulty</code>           游戏难度设置  <strong>0(普通) 1 (困难) 2 (自杀) 3(人间炼狱)</strong><br>
+<code>GameLength</code>    游戏波数  <strong>0(4波 ) 1(7波) 2(10波)</strong><br>
+<code>GamePassword</code>  房间密码</p>
+</blockquote>
+<p>查看KF进程<br>
+<code>ps -ef | grep KFGame</code><br>
+<img src="https://wulilinghan.github.io/post-images/1620110843013.png" alt="" loading="lazy"></p>
+<p><a href="https://wiki.killingfloor2.com/index.php?title=Dedicated_Server_(Killing_Floor_2)">Dedicated Server (Killing Floor 2) wiki</a></p>
+<h1 id="四-服务多开">四、服务多开</h1>
+<p>拷贝多份配置文件，更改<strong>配置文件运行端口</strong>就好了。</p>
+<pre><code>提供下我的配置参考下
+
+链接：https://pan.baidu.com/s/1bG2p7DCLAsyaQnYmbuhTxg 
+提取码：t41f 
+复制这段内容后打开百度网盘手机App，操作更方便哦
+</code></pre>
+<p>更改端口：</p>
+<ul>
+<li><code>KFWeb.ini</code></li>
+</ul>
+<pre><code>[IpDrv.WebServer]
+ListenPort=8081
+</code></pre>
+<ul>
+<li><code>LinuxServer-KFEngine.ini</code></li>
+</ul>
+<pre><code>[URL]
+Port=8888
+PeerPort=8889
+</code></pre>
+<p>在安装目录下<code>KFGame/Config/</code>新建几个文件夹，<br>
+<img src="https://wulilinghan.github.io/post-images/1620122347087.png" alt="" loading="lazy"><br>
+使用<code>-ConfigSubDir</code>参数启动多个服务。</p>
+<blockquote>
+<p>ConfigSubDir 找的是相对路径的配置，会自动找到<code>KFGame/Config/</code>目录下的文件夹，后面跟上文件夹名称就行了</p>
+</blockquote>
+<p>看下配置文件夹里的内容：<br>
+<img src="https://wulilinghan.github.io/post-images/1620122647594.png" alt="" loading="lazy"></p>
+<p>举几个启动例子：<br>
+启动服1<br>
+<code>nohup /home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64 KF-China_Temple_insane_edit -ConfigSubDir=kf2server-HellonEarth-Long &gt;/dev/null 2&gt;&amp;1 &amp;</code><br>
+启动服2<br>
+<code>nohup /home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64 KF-China_Temple_insane_edit -ConfigSubDir=kf2server-Suicidal-Long &gt;/dev/null 2&gt;&amp;1 &amp;</code></p>
+<p>注意看<code>-ConfigSubDir</code>后面的值不一样</p>
+<blockquote>
+<ul>
+<li><code>nohup ....  &gt;/dev/null 2&gt;&amp;1 &amp;</code> 可以使服务后台运行，并且忽略日志输出</li>
+<li><code>/home/steamcmd/steamapps/KF2Server/Binaries/Win64/KFGameSteamServer.bin.x86_64</code> 我自己的KF2的执行路径<code>/home/steamcmd/steamapps/KF2Server</code>这里可能不太一样，后面的是一样</li>
+<li><code>KF-China_Temple_insane_edit</code> 房间默认地图</li>
+<li><code>-ConfigSubDir=kf2server-Suicidal-Long</code> 指定不同的配置文件启动</li>
+</ul>
+</blockquote>
+<h1 id="五-服务重启">五、服务重启</h1>
+<p>找到进程，然后杀掉，重新用命令启动就好了。<br>
+<code>ps -ef | grep KFGame</code>查询进程，查到之后根据运行的名称杀进程<code>kill [pid]</code><br>
+这个pid就是使用查询命令查出来的<strong>数据的第二列</strong>。黄框的数据。<br>
+<img src="https://wulilinghan.github.io/post-images/1620120808655.png" alt="" loading="lazy"></p>
+<p>然后再执行你自己的<strong>启动命令</strong>就好了。</p>
+<h1 id="六-创意工坊订阅">六、创意工坊订阅</h1>
+<p>捯饬自己的服务器，当然是为了能够玩创意工坊里的第三方图了。</p>
+<p>TODO</p>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li><a href="#%E4%B8%80-%E5%AE%89%E8%A3%85steamcmd">一、安装SteamCMD</a>
+<ul>
+<li><a href="#1-%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C%E5%BA%93">1. 安装运行库</a></li>
+<li><a href="#2-%E5%AE%89%E8%A3%85steamcmd">2. 安装SteamCMD</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E5%AE%89%E8%A3%85kf2%E6%9C%8D%E5%8A%A1%E7%AB%AF">二、安装KF2服务端</a>
+<ul>
+<li><a href="#1-%E5%90%AF%E5%8A%A8steamcmd%E5%B9%B6%E4%B8%8B%E8%BD%BDkf2server">1. 启动steamcmd并下载KF2Server</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%88%BF%E9%97%B4%E9%85%8D%E7%BD%AE">三、服务器房间配置</a>
+<ul>
+<li><a href="#1-%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E5%90%AF%E5%8A%A8">1. 默认配置启动</a></li>
+<li><a href="#2-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3">2. 配置文件相关</a></li>
+<li><a href="#3-%E5%88%9B%E5%BB%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC">3. 创建启动脚本</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E5%BC%80">四、服务多开</a></li>
+<li><a href="#%E4%BA%94-%E6%9C%8D%E5%8A%A1%E9%87%8D%E5%90%AF">五、服务重启</a></li>
+<li><a href="#%E5%85%AD-%E5%88%9B%E6%84%8F%E5%B7%A5%E5%9D%8A%E8%AE%A2%E9%98%85">六、创意工坊订阅</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://wulilinghan.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="https://wulilinghan.github.io/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="application/javascript">
+
+  var gitalk = new Gitalk({
+    clientID: 'f31dbffe04c3b6748860',
+    clientSecret: '2262dd7008e765cc75d973a3343da75884449a25',
+    repo: 'ManJiis.github.io',
+    owner: 'ManJiis',
+    admin: ['ManJiis'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+    
+  
+</body>
+
+</html>

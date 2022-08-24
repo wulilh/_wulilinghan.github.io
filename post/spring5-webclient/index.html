@@ -1,0 +1,640 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Httpclient - Spring5 WebFlux之Webclient - 唧唧啵啵耶</title>
+<link rel="shortcut icon" href="https://wulilinghan.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://wulilinghan.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://wulilinghan.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Httpclient - Spring5 WebFlux之Webclient - 唧唧啵啵耶 - Atom Feed" href="https://wulilinghan.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="
+
+
+
+
+引包
+构建WebClient对象
+请求设置Cookie和Header
+GET请求
+POST请求
+上传文件, 请求异常处理
+
+
+
+
+
+
+Spring5带来了新的响应式web开发框架WebFlux，同时，也引入了新的HttpClien..." />
+  <meta property="og:title" content="Httpclient - Spring5 WebFlux之Webclient - 唧唧啵啵耶">
+  <meta property="og:description" content="
+
+
+
+
+引包
+构建WebClient对象
+请求设置Cookie和Header
+GET请求
+POST请求
+上传文件, 请求异常处理
+
+
+
+
+
+
+Spring5带来了新的响应式web开发框架WebFlux，同时，也引入了新的HttpClien..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://wulilinghan.github.io/post/spring5-webclient/" />
+  <meta property="og:image" content="https://wulilinghan.github.io/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="Httpclient - Spring5 WebFlux之Webclient - 唧唧啵啵耶">
+  <meta name="twitter:description" content="
+
+
+
+
+引包
+构建WebClient对象
+请求设置Cookie和Header
+GET请求
+POST请求
+上传文件, 请求异常处理
+
+
+
+
+
+
+Spring5带来了新的响应式web开发框架WebFlux，同时，也引入了新的HttpClien...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://wulilinghan.github.io/post/spring5-webclient/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="https://wulilinghan.github.io/media/css/prism-atom-dark.css">
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://wulilinghan.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      唧唧啵啵耶
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          Httpclient - Spring5 WebFlux之Webclient
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2021-04-10 · 7 min read</div>
+          
+            <a href="https://wulilinghan.github.io/tag/JmpQ_-b5O/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              HttpClient
+            </a>
+          
+            <a href="https://wulilinghan.github.io/tag/7CgCwmR1C/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Spring
+            </a>
+          
+            <a href="https://wulilinghan.github.io/tag/2COCn4_DC-/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Springboot
+            </a>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%BC%95%E5%8C%85">引包</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BAwebclient%E5%AF%B9%E8%B1%A1">构建WebClient对象</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E8%AE%BE%E7%BD%AEcookie%E5%92%8Cheader">请求设置Cookie和Header</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82">GET请求</a></li>
+<li><a href="#post%E8%AF%B7%E6%B1%82">POST请求</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6-%E8%AF%B7%E6%B1%82%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">上传文件, 请求异常处理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<p>Spring5带来了新的响应式web开发框架WebFlux，同时，也引入了新的HttpClient框架WebClient。WebClient是Spring5中引入的执行 HTTP 请求的非阻塞、反应式客户端。</p>
+<p>它对同步和异步以及流方案都有很好的支持，WebClient发布后，RestTemplate将在将来版本中弃用，并且不会向前添加主要新功能。</p>
+<blockquote>
+<p>public interface WebClient<br>
+Non-blocking, reactive client to perform HTTP requests, exposing a fluent, reactive &gt; API over underlying HTTP client libraries such as Reactor Netty.<br>
+Use static factory methods create() or create(String), or builder() to prepare an  &gt; instance.</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>For examples with a response body see:</p>
+<blockquote>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestHeadersSpec.html#retrieve--">retrieve()</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestHeadersSpec.html#exchangeToMono-java.util.function.Function-">exchangeToMono()</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestHeadersSpec.html#exchangeToFlux-java.util.function.Function-">exchangeToFlux()</a></li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>For examples with a request body see:</p>
+<blockquote>
+<blockquote>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestBodySpec.html#bodyValue-java.lang.Object-">bodyValue(Object)</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.RequestBodySpec.html#body-P-java.lang.Class-">body(Publisher,Class)</a></li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>Since:</p>
+<blockquote>
+<p>5.0</p>
+</blockquote>
+</blockquote>
+<h3 id="引包">引包</h3>
+<pre><code>        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
+             &lt;version&gt;2.3.0.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<h3 id="构建webclient对象">构建WebClient对象</h3>
+<pre><code class="language-Java">    private static final String JSESSIONID = &quot;6dfd8a2d-d6de-40e5-9611-3f604b402a8b&quot;;
+    private static final String TOKEN = &quot;6dfd8a2dd6de40e596113f604b402a8b&quot;;
+    private static final String BASE_URL = &quot;http://124.71.56.21:8081&quot;;
+
+    private static final WebClient client = WebClient.builder()
+            .baseUrl(BASE_URL)
+            .defaultHeader(&quot;token&quot;, TOKEN)
+            .defaultCookie(&quot;JSESSIONID&quot;, JSESSIONID)
+            .build();
+</code></pre>
+<p>这里已经这个对象加上默认的请求头和cookie了.</p>
+<h3 id="请求设置cookie和header">请求设置Cookie和Header</h3>
+<pre><code class="language-Java">    @Test
+    public void testGetUserList() {
+        Mono&lt;R&gt; resp = client.get().uri(&quot;/get/user/list&quot;)
+                .header(&quot;token&quot;, TOKEN)
+                .cookie(&quot;JSESSIONID&quot;, JSESSIONID)
+                .retrieve()
+                .bodyToMono(R.class);
+
+        System.out.println(&quot;resp = &quot; + resp.block());
+    }
+</code></pre>
+<h3 id="get请求">GET请求</h3>
+<ol>
+<li>使用使用placeholder传递参数</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 使用placeholder传递参数 ,并设置请求头和cookie
+     */
+    @Test
+    public void testGetUserBYId() {
+        Mono&lt;R&gt; resp = client.get()
+                // 多个参数也可以直接放到map中,参数名与placeholder对应上即可
+                .uri(&quot;/get/user/id?uid={uid}&quot;, 4) // 使用占位符
+                .retrieve()
+                .bodyToMono(R.class);
+        System.out.println(&quot;resp = &quot; + resp.block());
+    }
+</code></pre>
+<ol start="2">
+<li>使用uriBuilder传递参数</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 使用uriBuilder传递参数
+     */
+    @Test
+    public void testGet2() {
+        Mono&lt;String&gt; resp = WebClient.create()
+                .get()
+                .uri(uriBuilder -&gt; uriBuilder
+                        .scheme(&quot;http&quot;)
+                        .host(&quot;weathernew.pae.baidu.com&quot;)
+                        .path(&quot;/weathernew/pc&quot;)
+                        .queryParam(&quot;query&quot;, &quot;深圳天气&quot;)
+                        .queryParam(&quot;srcid&quot;, 4982)
+                        .queryParam(&quot;city_name&quot;, &quot;香港&quot;)
+                        .queryParam(&quot;province_name&quot;, &quot;香港&quot;)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class);
+        log.info(&quot;result:{}&quot;, resp.block());
+    }
+</code></pre>
+<h3 id="post请求">POST请求</h3>
+<ol>
+<li>表单提交</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 表单提交
+     */
+    @Test
+    public void testPostUserByForm() {
+        MultiValueMap&lt;String, String&gt; formData = new LinkedMultiValueMap&lt;&gt;();
+        formData.add(&quot;uid&quot;, &quot;4&quot;);
+        formData.add(&quot;username&quot;, &quot;相柳&quot;);
+        formData.add(&quot;age&quot;, &quot;14&quot;);
+        formData.add(&quot;address&quot;, &quot;梧桐山&quot;);
+
+        Mono&lt;R&gt; resp = client.post()
+                .uri(&quot;post/user/addByForm&quot;)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(BodyInserters.fromFormData(formData))
+                .retrieve().bodyToMono(R.class);
+
+        log.info(&quot;result:{}&quot;, resp.block());
+    }
+</code></pre>
+<ol start="2">
+<li>JSON格式数据提交</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * JSON提交数据
+     */
+    @Test
+    public void testPostUserByJson() {
+        User user = new User().setUid(5).setUsername(&quot;八岐大蛇&quot;).setAge(119).setAddress(&quot;东海&quot;);
+
+        //  1. 通过bean方式
+        Mono&lt;R&gt; resp1 = client.post()
+                .uri(&quot;post/user/addByJson&quot;)
+                .contentType(MediaType.APPLICATION_JSON)
+                // 使用bean方式提交JSON数据
+                .body(Mono.just(user), User.class)
+                .retrieve().bodyToMono(R.class);
+
+        // 2. 通过JSON字符串
+        Mono&lt;R&gt; resp2 = client.post()
+                .uri(&quot;post/user/addByJson&quot;)
+                .contentType(MediaType.APPLICATION_JSON)
+                // 使用bean方式提交JSON数据
+                .body(BodyInserters.fromValue(JSON.toJSONString(user)))
+                .retrieve().bodyToMono(R.class);
+
+        log.info(&quot;\nresult1:{}&quot;, resp1.block());
+        log.info(&quot;\nresult2:{}&quot;, resp2.block());
+    }
+</code></pre>
+<h3 id="上传文件-请求异常处理">上传文件, 请求异常处理</h3>
+<ol>
+<li>retrieve()</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 上传文件  设置异常处理
+     * &lt;p&gt;
+     * onStatus根据status code进行异常适配
+     * doOnError异常适配
+     * onErrorReturn返回默认值
+     */
+    @Test
+    public void testUploadFile() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+
+//        HttpEntity&lt;ClassPathResource&gt; entity1 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;yuque_diagram.jpg&quot;), headers);
+        HttpEntity&lt;ClassPathResource&gt; entity1 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;yuque_diagram.jpg&quot;));
+//        HttpEntity&lt;ClassPathResource&gt; entity2 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;线程类图.png&quot;), headers);
+        HttpEntity&lt;ClassPathResource&gt; entity2 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;线程类图.png&quot;));
+        HttpEntity&lt;ClassPathResource&gt; entity3 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;acane_madder - 庭園にて。.mp3&quot;));
+
+        MultiValueMap&lt;String, Object&gt; parts = new LinkedMultiValueMap&lt;&gt;();
+//        parts.add(&quot;file&quot;, entity1);
+        parts.add(&quot;file&quot;, entity2);
+
+        WebClient.ResponseSpec responseSpec = client.post()
+                .uri(&quot;/file/up1&quot;)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(BodyInserters.fromMultipartData(parts))
+                .retrieve();
+
+        Mono&lt;R&gt; onReturn = responseSpec.onStatus(
+                HttpStatus::is4xxClientError, resp -&gt; {
+                    log.error(&quot;error:{}, msg:{}&quot;, resp.statusCode().value(), resp.statusCode().getReasonPhrase());
+                    return Mono.error(new RuntimeException(resp.statusCode().value() + &quot; : &quot; + resp.statusCode().getReasonPhrase()));
+                }
+        )
+                .bodyToMono(R.class)
+                .doOnError(
+                        WebClientResponseException.class, err -&gt; {
+                            log.info(&quot;ERROR status:{}, msg:{}&quot;, err.getRawStatusCode(), err.getResponseBodyAsString());
+                            throw new RuntimeException(err.getMessage());
+                        }
+                )
+                .onErrorReturn(R.fail(&quot;网络异常&quot;));
+
+        log.info(&quot;\nresult: {}&quot;, onReturn.block());
+    }
+</code></pre>
+<ol start="2">
+<li>exchangeToMono()</li>
+</ol>
+<pre><code class="language-Java">    @Test
+    public void testUploadFile2() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+
+//        HttpEntity&lt;ClassPathResource&gt; entity1 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;yuque_diagram.jpg&quot;), headers);
+        HttpEntity&lt;ClassPathResource&gt; entity1 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;yuque_diagram.jpg&quot;));
+//        HttpEntity&lt;ClassPathResource&gt; entity2 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;线程类图.png&quot;), headers);
+        HttpEntity&lt;ClassPathResource&gt; entity2 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;线程类图.png&quot;));
+        HttpEntity&lt;ClassPathResource&gt; entity3 = new HttpEntity&lt;&gt;(new ClassPathResource(&quot;acane_madder - 庭園にて。.mp3&quot;));
+
+        MultiValueMap&lt;String, Object&gt; parts = new LinkedMultiValueMap&lt;&gt;();
+        parts.add(&quot;file&quot;, entity1);
+        parts.add(&quot;file&quot;, entity2);
+        parts.add(&quot;file&quot;, entity3);
+
+        Mono&lt;Serializable&gt; serializableMono = client.post()
+                .uri(&quot;/file/up1?isErr={isErr}&quot;, &quot;isErr&quot;)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(BodyInserters.fromMultipartData(parts))
+                .exchangeToMono(
+                        resp -&gt; {
+                            if (resp.statusCode().equals(HttpStatus.OK)) {
+                                return resp.bodyToMono(R.class);
+                            } else if (resp.statusCode().is4xxClientError()) {
+                                return Mono.error(new RuntimeException(resp.statusCode().value() + &quot; : &quot; + resp.statusCode().getReasonPhrase()));
+                            } else {
+                                return resp.createException().flatMap(Mono::error);
+                            }
+                        }
+                );
+        R block = ((R) serializableMono.block());
+        System.out.println(&quot;block = &quot; + block);
+    }
+</code></pre>
+<blockquote>
+<p><a href="https://github.com/tanglinghan/demo-collection/tree/main/http-demo">代码</a></p>
+</blockquote>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%BC%95%E5%8C%85">引包</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BAwebclient%E5%AF%B9%E8%B1%A1">构建WebClient对象</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E8%AE%BE%E7%BD%AEcookie%E5%92%8Cheader">请求设置Cookie和Header</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82">GET请求</a></li>
+<li><a href="#post%E8%AF%B7%E6%B1%82">POST请求</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6-%E8%AF%B7%E6%B1%82%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">上传文件, 请求异常处理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://wulilinghan.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="https://wulilinghan.github.io/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="application/javascript">
+
+  var gitalk = new Gitalk({
+    clientID: 'f31dbffe04c3b6748860',
+    clientSecret: '2262dd7008e765cc75d973a3343da75884449a25',
+    repo: 'ManJiis.github.io',
+    owner: 'ManJiis',
+    admin: ['ManJiis'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+    
+  
+</body>
+
+</html>

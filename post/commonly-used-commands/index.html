@@ -1,0 +1,731 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Linux - 常用命令 - 唧唧啵啵耶</title>
+<link rel="shortcut icon" href="https://wulilinghan.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://wulilinghan.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://wulilinghan.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Linux - 常用命令 - 唧唧啵啵耶 - Atom Feed" href="https://wulilinghan.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="操作系统: CentOS 7.6
+
+
+
+
+
+基本命令
+切换用户
+文件/目录权限设置
+查看当前目录下各文件夹占用空间大小
+查看 Linux 内核版本以及系统位数（备注：x86_64 表示 64 位系统， i686 i386 表示 32 位系统..." />
+  <meta property="og:title" content="Linux - 常用命令 - 唧唧啵啵耶">
+  <meta property="og:description" content="操作系统: CentOS 7.6
+
+
+
+
+
+基本命令
+切换用户
+文件/目录权限设置
+查看当前目录下各文件夹占用空间大小
+查看 Linux 内核版本以及系统位数（备注：x86_64 表示 64 位系统， i686 i386 表示 32 位系统..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://wulilinghan.github.io/post/commonly-used-commands/" />
+  <meta property="og:image" content="https://wulilinghan.github.io/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="Linux - 常用命令 - 唧唧啵啵耶">
+  <meta name="twitter:description" content="操作系统: CentOS 7.6
+
+
+
+
+
+基本命令
+切换用户
+文件/目录权限设置
+查看当前目录下各文件夹占用空间大小
+查看 Linux 内核版本以及系统位数（备注：x86_64 表示 64 位系统， i686 i386 表示 32 位系统...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://wulilinghan.github.io/post/commonly-used-commands/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="https://wulilinghan.github.io/media/css/prism-atom-dark.css">
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://wulilinghan.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      唧唧啵啵耶
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          Linux - 常用命令
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2020-04-12 · 8 min read</div>
+          
+            <a href="https://wulilinghan.github.io/tag/fG6OFigaz/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Linux
+            </a>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p>操作系统: <code>CentOS 7.6</code><br>
+<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4">基本命令</a></li>
+<li><a href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7">切换用户</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE">文件/目录权限设置</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F">查看当前目录下各文件夹占用空间大小</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B-linux-%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC%E4%BB%A5%E5%8F%8A%E7%B3%BB%E7%BB%9F%E4%BD%8D%E6%95%B0%E5%A4%87%E6%B3%A8x86_64-%E8%A1%A8%E7%A4%BA-64-%E4%BD%8D%E7%B3%BB%E7%BB%9F-i686-i386-%E8%A1%A8%E7%A4%BA-32-%E4%BD%8D%E7%B3%BB%E7%BB%9F">查看 Linux 内核版本以及系统位数（备注：x86_64 表示 64 位系统， i686 i386 表示 32 位系统）</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC">查看系统版本</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B-targz-tgz">文件解压 tar.gz / tgz</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9B%B8%E5%85%B3">防火墙相关</a></li>
+<li><a href="#%E9%87%8D%E5%90%AF%E9%98%B2%E7%81%AB%E5%A2%99">重启防火墙</a></li>
+<li><a href="#%E5%BC%80%E6%94%BE%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3">开放指定端口</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BC%80%E6%94%BE%E7%9A%84%E7%AB%AF%E5%8F%A3">查看开放的端口</a></li>
+<li><a href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3">关闭防火墙端口</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B9%8B%E9%97%B4%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93">服务器之间文件传输</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E4%BF%A1%E6%81%AF">查看磁盘信息</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E6%9C%89%E7%A1%AC%E7%9B%98%E5%8F%8A%E5%88%86%E5%8C%BA">查看已有硬盘及分区</a></li>
+<li><a href="#%E6%90%9C%E7%B4%A2%E8%BF%9B%E7%A8%8B">搜索进程</a></li>
+<li><a href="#%E5%90%8E%E5%8F%B0%E5%90%AF%E5%8A%A8java%E8%BF%9B%E7%A8%8B">后台启动java进程</a></li>
+<li><a href="#%E6%89%B9%E9%87%8F%E6%9D%80%E6%AD%BB%E7%AD%9B%E9%80%89%E8%BF%9B%E7%A8%8B">批量杀死筛选进程</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E7%94%A8cpu%E8%B5%84%E6%BA%90%E6%9C%80%E5%A4%9A%E7%9A%8410%E4%B8%AA%E8%BF%9B%E7%A8%8B%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4%E7%BB%84%E5%90%88">获取占用CPU资源最多的10个进程，可以使用如下命令组合:</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90%E6%9C%80%E5%A4%9A%E7%9A%8410%E4%B8%AA%E8%BF%9B%E7%A8%8B%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4%E7%BB%84%E5%90%88">获取占用内存资源最多的10个进程，可以使用如下命令组合</a></li>
+<li><a href="#%E6%A0%B9%E6%8D%AEpid%E6%9F%A5%E7%9C%8B%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BD%8D%E7%BD%AE">根据PID查看程序运行的位置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h3 id="基本命令">基本命令</h3>
+<pre><code>进入某文件夹 cd 
+浏览目录 ls/ls -l/ll
+创建文件夹  mkdir data
+          mkdir -p /los/data  -p递归创建
+创建文件 touch aaa.txt
+编辑文件 vi/vim aaa.txt
+删除文件 rm aaa.txt
+删除文件/文件夹 rm -rf [目录或文件]
+查看当前路径 pwd
+
+查看当前时间   date
+设置时区  cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+查看IP地址  ip addr
+
+</code></pre>
+<h3 id="切换用户">切换用户</h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>su - [用户名]</td>
+<td>切换用户，并且切换目录</td>
+<td>- 可以切换到用户的家目录，否则保持位置不变su 不接用户名可切换到root</td>
+</tr>
+<tr>
+<td>2</td>
+<td>exit</td>
+<td>退出当前登陆账号</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件目录权限设置">文件/目录权限设置</h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>命令格式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>chown</td>
+<td>chown 用户名 文件名/目录名</td>
+<td>修改拥有者</td>
+</tr>
+<tr>
+<td>2</td>
+<td>chgrp</td>
+<td>chgrp –R 组名 文件名/目录名</td>
+<td>修改组</td>
+</tr>
+<tr>
+<td>3</td>
+<td>chmod</td>
+<td>chmod –R 755 文件名/目录名</td>
+<td>修改权限</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>-R 递归设置<br>
+chown -R bfpuser ROOT       将文件夹ROOT拥有者改为bfpuser<br>
+chmod +x ./*.sh                   给当前目录sh文件添加可执行权限<br>
+chmod 444 ./index.html        设置index.html文件权限为只读<br>
+chmod在设置权限时，可以简单的设置<strong>三个数字分别</strong>对应 <strong>owner-group-other</strong> 的权限。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>命令格式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>w</td>
+<td>x</td>
+<td>用户名 文件名/目录名</td>
+</tr>
+<tr>
+<td>2</td>
+<td>chgrp</td>
+<td>chgrp –R 组名 文件名/目录名</td>
+<td>修改组</td>
+</tr>
+<tr>
+<td>3</td>
+<td>chmod</td>
+<td>chmod –R 755 文件名/目录名</td>
+<td>修改权限</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+  <tr>
+    <th colspan="3">owner</th>
+    <th colspan="3">group</th>
+    <th colspan="3">other</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>r</td>
+    <td>w</td>
+    <td>x</td>
+    <td>r</td>
+    <td>w</td>
+    <td>x</td>
+    <td>r</td>
+    <td>w</td>
+    <td>x</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>2</td>
+    <td>1</td>
+    <td>4</td>
+    <td>2</td>
+    <td>1</td>
+    <td>4</td>
+    <td>2</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>rwx</td>
+    <td>7</td>
+    <td>421</td>
+    <td></td>
+    <td>rw-</td>
+    <td>6</td>
+    <td>420</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>r-x</td>
+    <td>5</td>
+    <td>401</td>
+    <td></td>
+    <td>r--</td>
+    <td>4</td>
+    <td>400</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>-wx</td>
+    <td>3</td>
+    <td>021</td>
+    <td></td>
+    <td>-w-</td>
+    <td>2</td>
+    <td>020</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>--x</td>
+    <td>1</td>
+    <td>001</td>
+    <td></td>
+    <td>---</td>
+    <td>0</td>
+    <td>000</td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+<h3 id="查看当前目录下各文件夹占用空间大小">查看当前目录下各文件夹占用空间大小</h3>
+<p><code>du -h --max-depth=1 ./  </code></p>
+<h3 id="查看-linux-内核版本以及系统位数备注x86_64-表示-64-位系统-i686-i386-表示-32-位系统">查看 Linux 内核版本以及系统位数（备注：x86_64 表示 64 位系统， i686 i386 表示 32 位系统）</h3>
+<p><code>uname -a</code></p>
+<h3 id="查看系统版本">查看系统版本</h3>
+<p><code>lsb_release -a</code></p>
+<blockquote>
+<p>这个命令适用于所有的Linux发行版，包括Redhat、SuSE、Debian…等发行版。</p>
+<p>[root@localhost ~]# lsb_release -a<br>
+LSB Version:    :core-4.1-amd64:core-4.1-noarch<br>
+Distributor ID: CentOS<br>
+Description:    CentOS Linux release 7.6.1810 (Core)<br>
+Release:        7.6.1810<br>
+Codename:       Core</p>
+</blockquote>
+<p><code>cat /etc/redhat-release</code></p>
+<blockquote>
+<p>这种方法只适合Redhat系的Linux。</p>
+<p>[root@localhost ~]# cat /etc/redhat-release<br>
+CentOS Linux release 7.9.2009 (Core)</p>
+</blockquote>
+<h3 id="文件解压-targz-tgz">文件解压 tar.gz / tgz</h3>
+<p><code>tar -zxvf /source/kernel.tgz -C /source/linux-2.6.29</code></p>
+<h3 id="防火墙相关">防火墙相关</h3>
+<pre><code>systemctl start firewalld
+systemctl status firewalld 
+systemctl stop firewalld 
+</code></pre>
+<h3 id="重启防火墙">重启防火墙</h3>
+<p><code>firewall-cmd --reload</code></p>
+<h3 id="开放指定端口">开放指定端口</h3>
+<pre><code>firewall-cmd --zone=public --add-port=3306/tcp --permanent
+firewall-cmd --zone=public --add-port=6379/tcp --permanent
+firewall-cmd --zone=public --add-port=15672/tcp --permanent
+firewall-cmd --zone=public --add-port=5672/tcp --permanent
+firewall-cmd --zone=public --add-port=27017/tcp --permanent
+firewall-cmd --zone=public --add-port=8081/tcp --permanent 
+</code></pre>
+<blockquote>
+<p>命令含义：<br>
+--zone #作用域<br>
+--add-port=1935/tcp  #添加端口，格式为：端口/通讯协议<br>
+--permanent  #永久生效，没有此参数重启后失效</p>
+</blockquote>
+<h3 id="查看开放的端口">查看开放的端口</h3>
+<p><code>firewall-cmd --list-ports</code></p>
+<h3 id="关闭防火墙端口">关闭防火墙端口</h3>
+<p><code>firewall-cmd --zone=public --remove-port=27017/tcp --permanent</code></p>
+<h3 id="服务器之间文件传输">服务器之间文件传输</h3>
+<ol>
+<li>scp (参数不可以带密码</li>
+</ol>
+<pre><code>1. 22默认端口
+scp  -v -r [文件名称] root@[目标ip]:[目标服务器路径]
+例如: scp -v -r /usr/local/front root@10.10.66.154:/home/data/
+
+2. 非22默认端口
+scp -P [remote_port] -v -r [文件名称] root@[目标ip]:[目标服务器路径]
+</code></pre>
+<blockquote>
+<p>-v: 用来显示进度 . 可以用来查看连接 , 认证 , 或是配置错误 .<br>
+-r: 递归复制整个目录。<br>
+此命令不支持参数带密码</p>
+</blockquote>
+<ol start="2">
+<li>sshpass (参数可以带密码)</li>
+</ol>
+<pre><code>yum install -y sshpass
+
+1. 22端口
+远程连接主机：
+sshpass -p [remote_pass] ssh [root]@[remote_ip]
+
+本地执行远程机器的命令:
+sshpass -p [remote_pass] ssh [root]@[remote_ip] &quot;/root/xx.sh&quot;
+
+从密码文件读取文件内容作为密码去远程连接主机:
+sshpass -f aaa.txt ssh [root]@[remote_ip]
+
+2. 非22端口
+sshpass -p [remote_pass] ssh -p [remote_port] [root]@[remote_ip] &quot;/root/xx.sh&quot;
+
+sshpass -p [remote_pass] scp -P [remote_port] 源文件 目的文件
+</code></pre>
+<ol start="3">
+<li>rsync</li>
+</ol>
+<blockquote>
+<p>yum install -y rsync<br>
+注意，传输的双方都必须安装 rsync。</p>
+</blockquote>
+<pre><code>rsync -r [source1] [source2] [destination]
+
+source目录表示源目录，destination表示目标目录。
+上面命令中，source1、source2都会被同步到destination目录。
+-r表示递归，即包含子目录。注意，-r是必须的，否则 rsync 运行不会成功。
+
+-a参数可以替代-r，除了可以递归同步以外，还可以同步元信息（比如修改时间、权限等）。
+由于 rsync 默认使用文件大小和修改时间决定文件是否需要更新，所以-a比-r更有用。
+下面的用法才是常见的写法：
+rsync -a [source]... [destination]
+</code></pre>
+<h3 id="查看磁盘信息">查看磁盘信息</h3>
+<pre><code>df -hT 
+df -h
+fdisk -l
+</code></pre>
+<h3 id="查看已有硬盘及分区">查看已有硬盘及分区</h3>
+<p><code>lsblk</code></p>
+<h3 id="搜索进程">搜索进程</h3>
+<pre><code class="language-shell">### 1. 根据端口号查进程 
+netstat -nap | grep [port]
+### 2. 根据进程号PID查端口
+netstat -nap | grep [PID]
+### 3. 根据服务名查看进程 PID (第二列是PID)
+ps -ef | grep [服务名称] 
+</code></pre>
+<h3 id="后台启动java进程">后台启动java进程</h3>
+<p><code>nohup java -jar tabifcp-eureka-2.0.3.RELEASE.jar &gt;./logs/tabifcp-eureka.log 2&gt;&amp;1 &amp;</code><br>
+或者<br>
+<code>nohup java -jar server-eureka-2.0.3.RELEASE.jar &amp;&gt;./logs/server-eureka.log  &amp;</code><br>
+查看进程内存使用情况     返回的数值单位为KB <a href="https://www.dute.org/datastore-exchange?ref=search">在线单位换算</a><br>
+<code>cat /proc/[进程PID]/status | grep -e VmRSS | awk 'NR==1 {print $2}'</code><br>
+或者<br>
+<code>top -p [进程PID]</code></p>
+<blockquote>
+<p>top可以动态查看进程内存占用情况</p>
+<p>[root@localhost app]# top<br>
+top - 20:45:47 up 45 days, 23:53,  1 user,  load average: 0.08, 0.05, 0.05<br>
+Tasks: 158 total,   1 running, 157 sleeping,   0 stopped,   0 zombie<br>
+%Cpu(s):  4.8 us,  6.2 sy,  0.0 ni, 89.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st<br>
+KiB Mem :  3879808 total,   134732 free,  1788096 used,  1956980 buff/cache<br>
+KiB Swap:  1048572 total,   803864 free,   244708 used.  1641764 avail Mem</p>
+<p>PID     USER    PR  NI    VIRT      RES    SHR  S  %CPU %MEM  TIME+ COMMAND<br>
+16776  root      20   0  162104   2316   1592  R   0.7    0.1   0:00.05    top<br>
+1         root      20   0  191136   3032   1664  S   0.3    0.1  54:28.12  systemd</p>
+</blockquote>
+<h3 id="批量杀死筛选进程">批量杀死筛选进程</h3>
+<p><code>ps -ef | grep [关键字] | grep -v grep | awk '{print $2}' | xargs kill -9 </code></p>
+<h3 id="获取占用cpu资源最多的10个进程可以使用如下命令组合">获取占用CPU资源最多的10个进程，可以使用如下命令组合:</h3>
+<p><code>ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head</code></p>
+<h3 id="获取占用内存资源最多的10个进程可以使用如下命令组合">获取占用内存资源最多的10个进程，可以使用如下命令组合</h3>
+<p><code>ps aux|head -1;ps aux|grep -v PID|sort -rn -k +4|head</code><br>
+或者<br>
+<code>ps aux | sort -k4,4nr | head -n 10</code></p>
+<h3 id="根据pid查看程序运行的位置">根据PID查看程序运行的位置</h3>
+<p><code>ll /proc/[PID]</code></p>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4">基本命令</a></li>
+<li><a href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7">切换用户</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE">文件/目录权限设置</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F">查看当前目录下各文件夹占用空间大小</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B-linux-%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC%E4%BB%A5%E5%8F%8A%E7%B3%BB%E7%BB%9F%E4%BD%8D%E6%95%B0%E5%A4%87%E6%B3%A8x86_64-%E8%A1%A8%E7%A4%BA-64-%E4%BD%8D%E7%B3%BB%E7%BB%9F-i686-i386-%E8%A1%A8%E7%A4%BA-32-%E4%BD%8D%E7%B3%BB%E7%BB%9F">查看 Linux 内核版本以及系统位数（备注：x86_64 表示 64 位系统， i686 i386 表示 32 位系统）</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC">查看系统版本</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B-targz-tgz">文件解压 tar.gz / tgz</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9B%B8%E5%85%B3">防火墙相关</a></li>
+<li><a href="#%E9%87%8D%E5%90%AF%E9%98%B2%E7%81%AB%E5%A2%99">重启防火墙</a></li>
+<li><a href="#%E5%BC%80%E6%94%BE%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3">开放指定端口</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BC%80%E6%94%BE%E7%9A%84%E7%AB%AF%E5%8F%A3">查看开放的端口</a></li>
+<li><a href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3">关闭防火墙端口</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B9%8B%E9%97%B4%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93">服务器之间文件传输</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E4%BF%A1%E6%81%AF">查看磁盘信息</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E6%9C%89%E7%A1%AC%E7%9B%98%E5%8F%8A%E5%88%86%E5%8C%BA">查看已有硬盘及分区</a></li>
+<li><a href="#%E6%90%9C%E7%B4%A2%E8%BF%9B%E7%A8%8B">搜索进程</a></li>
+<li><a href="#%E5%90%8E%E5%8F%B0%E5%90%AF%E5%8A%A8java%E8%BF%9B%E7%A8%8B">后台启动java进程</a></li>
+<li><a href="#%E6%89%B9%E9%87%8F%E6%9D%80%E6%AD%BB%E7%AD%9B%E9%80%89%E8%BF%9B%E7%A8%8B">批量杀死筛选进程</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E7%94%A8cpu%E8%B5%84%E6%BA%90%E6%9C%80%E5%A4%9A%E7%9A%8410%E4%B8%AA%E8%BF%9B%E7%A8%8B%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4%E7%BB%84%E5%90%88">获取占用CPU资源最多的10个进程，可以使用如下命令组合:</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90%E6%9C%80%E5%A4%9A%E7%9A%8410%E4%B8%AA%E8%BF%9B%E7%A8%8B%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4%E7%BB%84%E5%90%88">获取占用内存资源最多的10个进程，可以使用如下命令组合</a></li>
+<li><a href="#%E6%A0%B9%E6%8D%AEpid%E6%9F%A5%E7%9C%8B%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BD%8D%E7%BD%AE">根据PID查看程序运行的位置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://wulilinghan.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="https://wulilinghan.github.io/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="application/javascript">
+
+  var gitalk = new Gitalk({
+    clientID: 'f31dbffe04c3b6748860',
+    clientSecret: '2262dd7008e765cc75d973a3343da75884449a25',
+    repo: 'ManJiis.github.io',
+    owner: 'ManJiis',
+    admin: ['ManJiis'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+    
+  
+</body>
+
+</html>

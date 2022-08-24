@@ -1,0 +1,581 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Httpclient - RestTemplate - 唧唧啵啵耶</title>
+<link rel="shortcut icon" href="https://wulilinghan.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://wulilinghan.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://wulilinghan.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Httpclient - RestTemplate - 唧唧啵啵耶 - Atom Feed" href="https://wulilinghan.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="
+
+
+
+
+注册RestTemplate
+GET请求, 并设置Cookie和Header
+GET请求传参
+POST请求
+上传文件
+
+
+
+
+
+
+注册RestTemplate
+@Component
+public class BeanRegiste..." />
+  <meta property="og:title" content="Httpclient - RestTemplate - 唧唧啵啵耶">
+  <meta property="og:description" content="
+
+
+
+
+注册RestTemplate
+GET请求, 并设置Cookie和Header
+GET请求传参
+POST请求
+上传文件
+
+
+
+
+
+
+注册RestTemplate
+@Component
+public class BeanRegiste..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://wulilinghan.github.io/post/httpclient-resttemplate/" />
+  <meta property="og:image" content="https://wulilinghan.github.io/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="Httpclient - RestTemplate - 唧唧啵啵耶">
+  <meta name="twitter:description" content="
+
+
+
+
+注册RestTemplate
+GET请求, 并设置Cookie和Header
+GET请求传参
+POST请求
+上传文件
+
+
+
+
+
+
+注册RestTemplate
+@Component
+public class BeanRegiste...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://wulilinghan.github.io/post/httpclient-resttemplate/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="https://wulilinghan.github.io/media/css/prism-atom-dark.css">
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://wulilinghan.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      唧唧啵啵耶
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          Httpclient - RestTemplate
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2021-04-11 · 6 min read</div>
+          
+            <a href="https://wulilinghan.github.io/tag/JmpQ_-b5O/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              HttpClient
+            </a>
+          
+            <a href="https://wulilinghan.github.io/tag/7CgCwmR1C/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Spring
+            </a>
+          
+            <a href="https://wulilinghan.github.io/tag/2COCn4_DC-/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Springboot
+            </a>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%B3%A8%E5%86%8Cresttemplate">注册RestTemplate</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82-%E5%B9%B6%E8%AE%BE%E7%BD%AEcookie%E5%92%8Cheader">GET请求, 并设置Cookie和Header</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82%E4%BC%A0%E5%8F%82">GET请求传参</a></li>
+<li><a href="#post%E8%AF%B7%E6%B1%82">POST请求</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">上传文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h3 id="注册resttemplate">注册RestTemplate</h3>
+<pre><code class="language-Java">@Component
+public class BeanRegister {
+
+    @Bean
+    public RestTemplate restTemplate(ClientHttpRequestFactory factory) {
+        return new RestTemplate(factory);
+    }
+
+    @Bean
+    public ClientHttpRequestFactory simpleClientHttpRequestFactory() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+//        factory.setReadTimeout(5000);
+//        factory.setConnectTimeout(15000);
+        // 设置代理
+        //factory.setProxy(null);
+        return factory;
+    }
+
+    /**
+     * org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException: The field file exceeds its maximum permitted size of 1048576 bytes., code=400
+     * 设置tomcat上传文件大小限制
+     *
+     * @return /
+     */
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //允许上传的文件最大值 (//KB,MB)
+        factory.setMaxFileSize(DataSize.parse(&quot;50MB&quot;));
+        /// 设置总上传数据总大小
+        factory.setMaxRequestSize(DataSize.parse(&quot;100MB&quot;));
+        return factory.createMultipartConfig();
+    }
+}
+</code></pre>
+<h3 id="get请求-并设置cookie和header">GET请求, 并设置Cookie和Header</h3>
+<pre><code class="language-Java">    /**
+     * // 1. 无参,不指定Header调用
+     * //        ResponseEntity&lt;R&gt; forEntity = restTemplate.getForEntity(URL_USER_LIST, R.class);
+     * &lt;p&gt;
+     * // 2. 无参,指定Header调用 get请求需要使用exchange()
+     */
+    @Test
+    public void testGetUserList() {
+        // 1. 无参,不指定Header调用
+//        ResponseEntity&lt;R&gt; forEntity = restTemplate.getForEntity(URL_USER_LIST, R.class);
+
+        // 2. 无参,指定Header调用 get请求需要使用exchange()
+
+        // 封装请求头
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        httpHeaders.set(&quot;token&quot;, TOKEN);
+        HttpEntity&lt;String&gt; httpEntity = new HttpEntity&lt;&gt;(null, httpHeaders);
+
+
+        ResponseEntity&lt;R&gt; forEntity1 = restTemplate.exchange(URL_GET_USER_LIST, HttpMethod.GET, httpEntity, R.class);
+        System.out.println(&quot;forEntity1.getBody() = &quot; + forEntity1.getBody());
+
+    }
+</code></pre>
+<h3 id="get请求传参">GET请求传参</h3>
+<pre><code class="language-Java">private static final String URL_GET_USER_ID = &quot;http://124.71.56.21:8081/get/user/id?uid={uid}&quot;;
+    /**
+     * 带参,并设置请求头,使用map封装参数
+     */
+    @Test
+    public void testGetUserBYId() {
+        // 带参,指定Header调用 get请求需要使用exchange()
+        List&lt;String&gt; cookies = new ArrayList&lt;&gt;();
+        cookies.add(&quot;JSESSIONID=&quot; + JSESSIONID);
+
+        // 封装请求头
+        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.put(HttpHeaders.COOKIE, cookies);
+        httpHeaders.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        httpHeaders.set(&quot;token&quot;, TOKEN);
+        HttpEntity&lt;String&gt; httpEntity = new HttpEntity&lt;&gt;(httpHeaders);
+
+        // 封装参数
+        Map&lt;String, Object&gt; paramMap = new HashMap&lt;&gt;();
+        paramMap.put(&quot;uid&quot;, &quot;1&quot;);
+
+        // 请求url要使用占位符
+        ResponseEntity&lt;R&gt; forEntity1 = restTemplate.exchange(URL_GET_USER_ID, HttpMethod.GET, httpEntity, R.class, paramMap);
+        System.out.println(&quot;forEntity1.getBody() = &quot; + forEntity1.getBody());
+    }
+</code></pre>
+<h3 id="post请求">POST请求</h3>
+<ol>
+<li>表单提交</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * 表单提交, 要使用MultiValueMap
+     */
+    @Test
+    public void testPostUserByForm() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        headers.set(&quot;token&quot;, TOKEN);
+
+        MultiValueMap&lt;String, Object&gt; map = new LinkedMultiValueMap&lt;String, Object&gt;();
+        map.add(&quot;uid&quot;, 4);
+        map.add(&quot;username&quot;, &quot;嘻嘻&quot;);
+        map.add(&quot;age&quot;, 24);
+        map.add(&quot;address&quot;, &quot;潮汕&quot;);
+        HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt; request = new HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt;(map, headers);
+
+        ResponseEntity&lt;R&gt; response = restTemplate.postForEntity(URL_POST_USER_BY_FORM, request, R.class);
+        System.out.println(&quot;response = &quot; + response.getBody());
+    }
+</code></pre>
+<ol start="2">
+<li>JSON提交</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * JSON提交
+     */
+    @Test
+    public void testPostUserByJson() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set(&quot;Accept&quot;, MediaType.APPLICATION_JSON_VALUE);
+        headers.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        headers.set(&quot;token&quot;, TOKEN);
+
+        User user = new User().setUid(5).setUsername(&quot;haha&quot;).setAge(66).setAddress(&quot;龙岗&quot;);
+        String jsonString = JSON.toJSONString(user);
+        System.out.println(&quot;jsonString = &quot; + jsonString);
+
+//        JSONObject jsonString = new JSONObject();
+//        jsonString.put(&quot;uid&quot;, 5);
+//        jsonString.put(&quot;username&quot;, &quot;haha&quot;);
+//        jsonString.put(&quot;age&quot;, 77);
+//        jsonString.put(&quot;address&quot;, &quot;龙岗&quot;);
+
+        HttpEntity&lt;String&gt; request = new HttpEntity&lt;&gt;(jsonString, headers);
+
+        ResponseEntity&lt;R&gt; response = restTemplate.postForEntity(URL_POST_USER_BY_JSON, request, R.class);
+        System.out.println(&quot;response = &quot; + response.getBody());
+    }
+</code></pre>
+<h3 id="上传文件">上传文件</h3>
+<ol>
+<li>设置Tomcat上传限制</li>
+</ol>
+<pre><code class="language-Java">    /**
+     * org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException: The field file exceeds its maximum permitted size of 1048576 bytes., code=400
+     * 设置tomcat上传文件大小限制
+     *
+     * @return /
+     */
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //允许上传的文件最大值 (//KB,MB)
+        factory.setMaxFileSize(DataSize.parse(&quot;50MB&quot;));
+        /// 设置总上传数据总大小
+        factory.setMaxRequestSize(DataSize.parse(&quot;100MB&quot;));
+        return factory.createMultipartConfig();
+    }
+</code></pre>
+<p>案例:</p>
+<pre><code class="language-Java">    /**
+     * 上传文件
+     */
+    @Test
+    public void testUploadFile() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
+        httpHeaders.set(HttpHeaders.COOKIE, &quot;JSESSIONID=&quot; + JSESSIONID);
+        httpHeaders.set(&quot;token&quot;, TOKEN);
+
+        MultiValueMap&lt;String, Object&gt; paramMap = new LinkedMultiValueMap&lt;&gt;();
+        paramMap.add(&quot;file&quot;, new ClassPathResource(&quot;yuque_diagram.jpg&quot;));
+        paramMap.add(&quot;file&quot;, new ClassPathResource(&quot;线程类图.png&quot;));
+        paramMap.add(&quot;file&quot;, new ClassPathResource(&quot;acane_madder - 庭園にて。.mp3&quot;));
+        paramMap.add(&quot;isErr&quot;, &quot;&quot;);
+
+        HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt; httpEntity = new HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt;(paramMap, httpHeaders);
+
+        ResponseEntity&lt;R&gt; response = restTemplate.postForEntity(URL_POST_FILE_UP1, httpEntity, R.class);
+        System.out.println(&quot;response = &quot; + response.getBody());
+        System.out.println(&quot;response.getStatusCode() = &quot; + response.getStatusCode());
+        System.out.println(&quot;response.getStatusCode().is2xxSuccessful() = &quot; + response.getStatusCode().is2xxSuccessful());
+
+    }
+</code></pre>
+<blockquote>
+<p><a href="https://github.com/tanglinghan/demo-collection/tree/main/http-demo">代码</a></p>
+</blockquote>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%B3%A8%E5%86%8Cresttemplate">注册RestTemplate</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82-%E5%B9%B6%E8%AE%BE%E7%BD%AEcookie%E5%92%8Cheader">GET请求, 并设置Cookie和Header</a></li>
+<li><a href="#get%E8%AF%B7%E6%B1%82%E4%BC%A0%E5%8F%82">GET请求传参</a></li>
+<li><a href="#post%E8%AF%B7%E6%B1%82">POST请求</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">上传文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://wulilinghan.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="https://wulilinghan.github.io/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="application/javascript">
+
+  var gitalk = new Gitalk({
+    clientID: 'f31dbffe04c3b6748860',
+    clientSecret: '2262dd7008e765cc75d973a3343da75884449a25',
+    repo: 'ManJiis.github.io',
+    owner: 'ManJiis',
+    admin: ['ManJiis'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+    
+  
+</body>
+
+</html>
